@@ -1,0 +1,29 @@
+{
+	"Id": "deployments-123",
+	"ReleaseId": "releases-123",
+	"EnvironmentId": "Environments-123",
+	"ForcePackageDownload": false,
+	"ForcePackageRedeployment": false,
+	"SkipActions": [ ],
+	"SpecificMachineIds": [ ],
+	"TaskId": "ServerTasks-123",
+	"ProjectId": "projects-123",
+	"UseGuidedFailure": false,
+	"Comments": "Test deployment from node script",
+	"FormValues": { },
+	"QueueTime": null,
+	"Name": "Deploy to DEV-SERVER-1",
+	"Created": "2015-04-20T21:33:25.572+00:00",
+	"LastModifiedOn": "2015-04-20T21:33:25.666+00:00",
+	"LastModifiedBy": "account@mycompany.com",
+	"Links": {
+		"Self": "/api/deployments/deployments-123",
+		"Release": "/api/releases/releases-123",
+		"Environment": "/api/environments/Environments-123",
+		"Project": "/api/projects/projects-123",
+		"Task": "/api/tasks/ServerTasks-123",
+		"Web": "/app#/deployments/deployments-123",
+		"Artifacts": "/api/artifacts?regarding=deployments-123",
+		"Interruptions": "/api/interruptions?regarding=deployments-123"
+	}
+}

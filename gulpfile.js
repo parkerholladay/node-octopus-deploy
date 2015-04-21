@@ -8,7 +8,7 @@ var mocha = require('gulp-mocha');
 var cover = require('gulp-coverage');
 
 // file specs for collections of files to operate on
-var jsFiles = ['lib/**/*.js'];
+var jsFiles = ['lib/**/*.js', 'test/**/*.js'];
 var jsMochaTestFiles = ['test/**/*.js'];
 
 // Single run of all tasks with report generation
@@ -16,7 +16,7 @@ gulp.task('default', 'Lint and Test server side js', ['lint', 'test']);
 
 gulp.task('dev', 'TDD runner for lint, test of lib', ['lint', 'test-tdd'], function () {
 	gulp.watch(jsFiles, ['lint']);
-	gulp.watch(jsMochaTestFiles, ['test-tdd']);
+	gulp.watch(jsFiles, ['test-tdd']);
 });
 
 gulp.task('test-tdd', 'Runs the tests for lib', function () {

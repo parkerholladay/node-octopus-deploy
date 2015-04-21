@@ -1,39 +1,45 @@
 {
-  "name": "octopus-deploy",
-  "version": "1.0.0",
-  "description": "Node script to create a release within Octopus Deploy, and optionally also deploy that release. This package will use the Octopus Deploy REST API in order to be able to call it from a linux machine.",
-  "main": "./lib/octopus-deploy.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iojohnso/node-octopus-deploy.git"
-  },
-  "keywords": [
-    "node",
-    "octopus",
-    "deploy",
-    "linux",
-    "rest"
-  ],
-  "author": {
-    "name": "Isaac Johnson",
-    "email": "iojohnso@gmail.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/iojohnso/node-octopus-deploy/issues"
-  },
-  "homepage": "https://github.com/iojohnso/node-octopus-deploy",
-  "devDependencies": {
+	"name": "octopus-deploy",
+	"version": "1.0.0",
+	"description": "Node script to create a release within Octopus Deploy, and optionally also deploy that release. This package will use the Octopus Deploy REST API in order to be able to call it from a linux machine.",
+	"main": "./lib/client.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/iojohnso/node-octopus-deploy.git"
+	},
+	"keywords": [
+		"node",
+		"octopus",
+		"deploy",
+		"linux",
+		"rest"
+	],
+	"author": {
+		"name": "Isaac Johnson",
+		"email": "iojohnso@gmail.com"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/iojohnso/node-octopus-deploy/issues"
+	},
+	"homepage": "https://github.com/iojohnso/node-octopus-deploy",
+	"dependencies": {
+		"bluebird": "^2.9.24",
+		"request-promise": "^0.4.2"
+	},
+	"devDependencies": {
 		"chai": "~1.10.0",
-    "gulp": "^3.8.11",
-    "gulp-cached": "^1.0.4",
-    "gulp-coverage": "^0.3.34",
-    "gulp-help": "^1.3.4",
-    "gulp-jshint": "^1.10.0",
-    "gulp-mocha": "^2.0.1",
-    "gulp-watch": "^4.2.4"
-  }
+		"gulp": "^3.8.11",
+		"gulp-cached": "^1.0.4",
+		"gulp-coverage": "^0.3.34",
+		"gulp-help": "^1.3.4",
+		"gulp-jshint": "^1.10.0",
+		"gulp-mocha": "^2.0.1",
+		"gulp-watch": "^4.2.4",
+		"jshint-stylish": "^1.0.1",
+		"sinon": "^1.14.1"
+	}
 }
