@@ -53,6 +53,26 @@ describe('deployments', function () {
 		});
 	});
 
+	describe('create', function () {
+
+		it('should create a deployment', function () {
+
+			var environmentId = 'Environments-123';
+			var releaseId = 'releases-123';
+			var comments = 'Deploy releases-123 to DEVSERVER1';
+			// Form Value Example: Source Directory
+			// The formValues.attribute is unique id for the 'SourceDir' variable
+			var formValues = {
+				'd02ff723-7fdb-2011-792d-ad99eaa3e1cc': '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3'
+			};
+
+			return client.deployment.create(environmentId, releaseId, comments, formValues)
+				.then(function (deployment) {
+					internals.validateDeploymentObject(deployment);
+				});
+		});
+	});
+
 });
 
 internals.validateDeploymentObject = function (deployment) {
