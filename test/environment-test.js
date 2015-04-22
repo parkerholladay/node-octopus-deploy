@@ -14,7 +14,6 @@ var client = new OctoDeployApi(testConfig);
 
 var sandbox;
 var octoRequestGet;
-var octoRequestPost;
 
 var internals = {};
 

@@ -13,7 +13,8 @@ var mockRelease = require('./mocks/mock-release.json');
 var client = new OctoDeployApi(testConfig);
 
 var sandbox;
-var releasesFindByProjectIdAndVersion;
+var octoRequestGet;
+var octoRequestPost;
 
 var internals = {};
 
@@ -22,7 +23,11 @@ describe('releases', function () {
 	beforeEach(function (done) {
 
 		sandbox = require('sinon').sandbox.create();
-		releasesFindByProjectIdAndVersion = sandbox.stub(require('request-promise'), 'get', function (options) {
+		octoRequestGet = sandbox.stub(require('request-promise'), 'get', function (options) {
+
+			return BPromise.resolve(mockRelease);
+		});
+		octoRequestPost = sandbox.stub(require('request-promise'), 'post', function (options) {
 
 			return BPromise.resolve(mockRelease);
 		});
@@ -56,6 +61,21 @@ describe('releases', function () {
 			var version = '1.0.0-rc-3';
 
 			return client.release.findByProjectIdAndVersion(projectId, version)
+				.then(function (release) {
+					internals.validateReleaseObject(release);
+				});
+		});
+	});
+
+	describe('create', function () {
+
+		it('should create a release', function () {
+
+			var projectId = 'project-123';
+			var version = '1.0.0-rc-3';
+			var releaseNotes = 'Release notes for testing';
+
+			return client.release.create(projectId, version, releaseNotes)
 				.then(function (release) {
 					internals.validateReleaseObject(release);
 				});
