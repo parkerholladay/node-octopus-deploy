@@ -1,6 +1,6 @@
 {
 	"Id": "Environments-123",
-	"Name": "DEV-SERVER-1",
+	"Name": "DEV-SERVER",
 	"Description": "DEV server 1 environment",
 	"SortOrder": 3,
 	"UseGuidedFailure": false,
