@@ -1,0 +1,32 @@
+{
+	"Id": "projects-123",
+	"VariableSetId": "variableset-projects-123",
+	"DeploymentProcessId": "deploymentprocess-projects-123",
+	"IncludedLibraryVariableSetIds": [ ],
+	"DefaultToSkipIfAlreadyInstalled": false,
+	"VersioningStrategy": {
+		"DonorPackageStepId": null,
+		"Template": "#{Octopus.Version.LastMajor}.#{Octopus.Version.LastMinor}.#{Octopus.Version.NextPatch}"
+	},
+	"ReleaseCreationStrategy": {
+		"ReleaseCreationPackageStepId": ""
+	},
+	"Name": "My Project Name",
+	"Slug": "my-project-name",
+	"Description": "",
+	"IsDisabled": false,
+	"ProjectGroupId": "ProjectGroups-123",
+	"LifecycleId": "lifecycle-ProjectGroups-132",
+	"AutoCreateRelease": false,
+	"LastModifiedOn": "2015-02-25T21:53:16.663+00:00",
+	"LastModifiedBy": "account@mycompany.com",
+	"Links": {
+		"Self": "/api/projects/projects-123",
+		"Releases": "/api/projects/projects-123/releases{/version}{?skip}",
+		"Variables": "/api/variables/variableset-projects-123",
+		"Progression": "/api/progression/projects-123",
+		"DeploymentProcess": "/api/deploymentprocesses/deploymentprocess-projects-123",
+		"Web": "/app#/projects/projects-123",
+		"Logo": "/api/projects/projects-123/logo"
+	}
+}

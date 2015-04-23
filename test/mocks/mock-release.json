@@ -1,0 +1,28 @@
+{
+	"Id": "releases-123",
+	"Assembled": "2015-04-20T21:33:25.244+00:00",
+	"ReleaseNotes": "Release Notes Here - Testing Through REST API",
+	"ProjectId": "projects-123",
+	"ProjectVariableSetSnapshotId": "variableset-projects-123-snapshot-1",
+	"LibraryVariableSetSnapshotIds": [ ],
+	"ProjectDeploymentProcessSnapshotId": "deploymentprocess-projects-123-snapshot-1",
+	"SelectedPackages": [ ],
+	"Version": "1.0.0-rc-3",
+	"LastModifiedOn": "2015-04-20T21:33:25.259+00:00",
+	"LastModifiedBy": "account@mycompany.com",
+	"Links": {
+		"Self": "/api/releases/releases-123",
+		"Project": "/api/projects/projects-123",
+		"Progression": "/api/releases/releases-123/progression",
+		"Deployments": "/api/releases/releases-123/deployments",
+		"DeploymentTemplate": "/api/releases/releases-123/deployments/template",
+		"Artifacts": "/api/artifacts?regarding=releases-123",
+		"ProjectVariableSnapshot": "/api/variables/variableset-projects-123-snapshot-3",
+		"ProjectDeploymentProcessSnapshot": "/api/deploymentprocesses/deploymentprocess-projects-123-snapshot-4",
+		"Web": "/app#/releases/releases-123",
+		"SnapshotVariables": "/api/releases/releases-123/snapshot-variables",
+		"Defects": "/api/releases/releases-123/defects",
+		"ReportDefect": "/api/releases/releases-123/defects",
+		"ResolveDefect": "/api/releases/releases-123/defects/resolve"
+	}
+}
