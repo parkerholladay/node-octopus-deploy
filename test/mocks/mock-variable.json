@@ -1,0 +1,102 @@
+{
+	"Id": "variableset-projects-123",
+	"OwnerId": "projects-123",
+	"Version": 1,
+	"Variables": [
+		{
+			"Id": "d02ff723-6fdb-2011-792d-ad99eaa3e0bb",
+			"Name": "SourceDir",
+			"Value": "TBD",
+			"Scope": {
+				"Environment": [
+					"Environments-123"
+				]
+			},
+			"IsSensitive": false,
+			"IsEditable": true,
+			"Prompt": {
+				"Label": "SourceDir",
+				"Description": "Build drop location",
+				"Required": true
+			}
+		},
+		{
+			"Id": "4b1ec790-ef03-cfec-e1dd-d348f7186bfd",
+			"Name": "SourceDir",
+			"Value": "TBD",
+			"Scope": {
+				"Environment": [
+					"Environments-234",
+					"Environments-345",
+					"Environments-456"
+				]
+			},
+			"IsSensitive": false,
+			"IsEditable": true,
+			"Prompt": null
+		}
+	],
+	"ScopeValues": {
+		"Environments": [
+			{
+				"Id": "Environments-123",
+				"Name": "DEV-SERVER"
+			},
+			{
+				"Id": "Environments-234",
+				"Name": "QA-SERVER"
+			},
+			{
+				"Id": "Environments-345",
+				"Name": "UAT-SERVER"
+			},
+			{
+				"Id": "Environments-456",
+				"Name": "PROD-SERVER"
+			}
+		],
+		"Machines": [
+			{
+				"Id": "machines-123",
+				"Name": "SERVER123"
+			},
+			{
+				"Id": "machines-234",
+				"Name": "SERVER234"
+			},
+			{
+				"Id": "machines-345",
+				"Name": "SERVER345"
+			},
+			{
+				"Id": "machines-456",
+				"Name": "SERVER456"
+			}
+		],
+		"Actions": [
+			{
+				"Id": "c52c9d38-d0a1-4477-a53d-eb05fcad1094",
+				"Name": "1. Run Script"
+			},
+			{
+				"Id": "a6e49d7a-24a4-4da1-a75d-47a7c704895e",
+				"Name": "2. Send Failed email"
+			},
+			{
+				"Id": "0741d17c-85cb-48bc-a18a-cdea8a266bcf",
+				"Name": "3. Send Complete email"
+			}
+		],
+		"Roles": [
+			{
+				"Id": "admin",
+				"Name": "admin"
+			}
+		]
+	},
+	"LastModifiedOn": "2015-03-17T19:17:58.763+00:00",
+	"LastModifiedBy": "account@mycompany.com",
+	"Links": {
+		"Self": "/api/variables/variableset-projects-123"
+	}
+}
