@@ -6,11 +6,46 @@ This package uses the Octopus Deploy REST API.
 
 This module was specifically created in order to initiate a release and deploy from a linux machine.
 
-# Installation
+The primary usage was to be able to call it via the command line, but you could also use it as a library as well.
+
+# Command Line Usage
+
+Install it globally...
+
+	npm install node-octopus-deploy -g
+	
+## Create Release
+
+Here is an example of creating a release (make into one line)
+
+	octopus-deploy-create-release 
+		--host=https://deploy.mycompany.com 
+		--apiKey=ABC-123 
+		--projectSlugOrId=my-project
+		--version=0.0.0-test-node-od-1 
+		--releaseNotes="Test release notes"
+
+## Create Release and Deploy
+
+Here is an example of creating a release, then deploying that release (make into one line)
+
+`comments` and `variables` are optional
+
+	octopus-deploy-create-release-and-deploy 
+		--host=https://deploy.mycompany.com 
+		--apiKey=ABC-123 
+		--projectSlugOrId=my-project
+		--version=0.0.0-test-node-od-1 
+		--releaseNotes="Test release notes"
+		--environmentName="DEV-SERVER"
+		--comments="Automated Deploy to DEV-SERVER as post-build step"
+		--variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\0.0.0-test-node-od-1 \"}"
+	
+# Library Usage
+
+If you are looking to use it as a library, you are probably looking to install it locally.
 
 	npm install node-octopus-deploy
-	
-# Usage
 
 This module tries to use promises whenever possible, specifically [bluebird](https://github.com/petkaantonov/bluebird) promises.
 
@@ -60,7 +95,6 @@ This module tries to use promises whenever possible, specifically [bluebird](htt
 	var version = '1.0.0-rc-3';
 	var releaseNotes = 'Release notes for testing';
 	
-	// Note: you can pass 
 	releasePromise = client.release.create(projectIdOrSlug, version, releaseNotes);
 	
 	releasePromise.then(function (release) {

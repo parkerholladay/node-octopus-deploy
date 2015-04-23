@@ -34,12 +34,12 @@ describe('projects', function () {
 		done();
 	});
 
-	describe('findByIdOrSlug', function () {
+	describe('findBySlugOrId', function () {
 
 		it('should find a project by id', function () {
 
 			var id = 'project-123';
-			return client.project.findByIdOrSlug(id)
+			return client.project.findBySlugOrId(id)
 				.then(function (project) {
 					internals.validateProjectObject(project);
 				});
@@ -48,7 +48,7 @@ describe('projects', function () {
 		it('should find a project by slug', function () {
 
 			var slug = 'my-project-name';
-			return client.project.findByIdOrSlug(slug)
+			return client.project.findBySlugOrId(slug)
 				.then(function (project) {
 					internals.validateProjectObject(project);
 				});

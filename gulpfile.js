@@ -8,7 +8,7 @@ var mocha = require('gulp-mocha');
 var cover = require('gulp-coverage');
 
 // file specs for collections of files to operate on
-var jsFiles = ['lib/**/*.js', 'test/**/*.js'];
+var jsFiles = ['bin/**/*.js', 'lib/**/*.js', 'test/**/*.js'];
 var jsMochaTestFiles = ['test/**/*.js'];
 
 // Single run of all tasks with report generation
