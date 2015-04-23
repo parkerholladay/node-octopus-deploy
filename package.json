@@ -6,6 +6,10 @@
   "scripts": {
     "test": "gulp test"
   },
+	"bin": {
+		"octopus-deploy-create-release": "./bin/create-release.js",
+		"octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js"
+	},
   "repository": {
     "type": "git",
     "url": "https://github.com/iojohnso/node-octopus-deploy.git"

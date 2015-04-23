@@ -81,13 +81,13 @@ describe('helper', function () {
 			// Create Release
 			return client.helper.createReleaseAndDeploy(
 				projectId, version, releaseNotes, environmentId, comments, formValues)
-				.then (function(deployment) {
+				.then(function (deployment) {
 
-				expect(deployment).to.be.instanceof(Object);
-				expect(deployment.Id).to.be.a('string');
+					expect(deployment).to.be.instanceof(Object);
+					expect(deployment.Id).to.be.a('string');
 
-				return deployment;
-			});
+					return deployment;
+				});
 
 		});
 
@@ -113,13 +113,36 @@ describe('helper', function () {
 			// Create Release
 			return client.helper.simpleCreateReleaseAndDeploy(
 				projectSlug, version, releaseNotes, environmentName, comments, variables)
-				.then (function(deployment) {
+				.then(function (deployment) {
 
-				expect(deployment).to.be.instanceof(Object);
-				expect(deployment.Id).to.be.a('string');
+					expect(deployment).to.be.instanceof(Object);
+					expect(deployment.Id).to.be.a('string');
 
-				return deployment;
-			});
+					return deployment;
+				});
+
+		});
+
+	});
+
+	describe('simpleCreateRelease', function () {
+
+		it('should create a release', function () {
+
+			// Release Information
+			var projectSlugOrId = 'my-project-name';
+			var version = '1.0.0-rc-3';
+			var releaseNotes = 'Release notes for testing';
+
+			// Create Release
+			return client.helper.simpleCreateRelease(projectSlugOrId, version, releaseNotes)
+				.then(function (release) {
+
+					expect(release).to.be.instanceof(Object);
+					expect(release.Id).to.be.a('string');
+
+					return release;
+				});
 
 		});
 
