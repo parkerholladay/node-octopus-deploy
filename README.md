@@ -60,7 +60,6 @@ This module tries to use promises whenever possible, specifically [bluebird](htt
 	var version = '1.0.0-rc-3';
 	var releaseNotes = 'Release notes for testing';
 	
-	// Note: you can pass 
 	releasePromise = client.release.create(projectIdOrSlug, version, releaseNotes);
 	
 	releasePromise.then(function (release) {
