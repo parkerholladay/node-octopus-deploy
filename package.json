@@ -31,21 +31,21 @@
 	},
 	"homepage": "https://github.com/iojohnso/node-octopus-deploy",
 	"dependencies": {
-		"bluebird": "^2.9.24",
-		"lodash": "^3.7.0",
-		"request-promise": "^0.4.2",
-		"yargs": "^3.7.2"
+		"bluebird": "~2.9.24",
+		"lodash": "~3.7.0",
+		"request-promise": "~0.4.2",
+		"yargs": "~3.7.2"
 	},
 	"devDependencies": {
 		"chai": "~1.10.0",
-		"gulp": "^3.8.11",
-		"gulp-cached": "^1.0.4",
-		"gulp-coverage": "^0.3.34",
-		"gulp-help": "^1.3.4",
-		"gulp-jshint": "^1.10.0",
-		"gulp-mocha": "^2.0.1",
-		"gulp-watch": "^4.2.4",
-		"jshint-stylish": "^1.0.1",
-		"sinon": "^1.14.1"
+		"gulp": "~3.8.11",
+		"gulp-cached": "~1.0.4",
+		"gulp-coverage": "~0.3.34",
+		"gulp-help": "~1.3.4",
+		"gulp-jshint": "~1.10.0",
+		"gulp-mocha": "~2.0.1",
+		"gulp-watch": "~4.2.4",
+		"jshint-stylish": "~1.0.1",
+		"sinon": "~1.14.1"
 	}
 }
