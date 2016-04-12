@@ -1,4 +1,4 @@
-# node-octopus-deploy
+# octopus-deploy
 
 [![Build Status](https://travis-ci.org/iojohnso/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/iojohnso/node-octopus-deploy)
 
@@ -15,7 +15,7 @@ The primary usage was to be able to call it via the command line, but you could 
 
 Install it globally...
 
-	npm install node-octopus-deploy -g
+	npm install octopus-deploy -g
 	
 ## Create Release
 
@@ -48,7 +48,7 @@ Here is an example of creating a release, then deploying that release (make into
 
 If you are looking to use it as a library, you are probably looking to install it locally.
 
-	npm install node-octopus-deploy
+	npm install octopus-deploy
 
 This module tries to use promises whenever possible, specifically [bluebird](https://github.com/petkaantonov/bluebird) promises.
 
