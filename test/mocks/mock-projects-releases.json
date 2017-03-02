@@ -1,0 +1,21 @@
+{
+  "ItemType": "Release",
+  "IsStale": false,
+  "TotalResults": 13,
+  "ItemsPerPage": 30,
+  "Items": [
+    {
+      "Id": "Releases-2084",
+      "Assembled": "2017-03-02T09:57:39.868+00:00",
+      "ReleaseNotes": "Release 2.21.0.145",
+      "ProjectId": "Projects-123",
+      "ChannelId": "Channels-191",
+      "ProjectVariableSetSnapshotId": "variableset-Projects-123-s-0-YHP5Z",
+      "LibraryVariableSetSnapshotIds": [],
+      "ProjectDeploymentProcessSnapshotId": "deploymentprocess-Projects-123-s-16-JCN5E",
+      "SelectedPackages": {},
+      "Version": "2.21.0.145",
+      "Links": {}
+    }
+  ]
+}
