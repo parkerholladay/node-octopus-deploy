@@ -123,6 +123,30 @@ describe('helper', function () {
 
 		});
 
+		it('should create a release and then deploy that release (via options object as only parameter)', function () {
+			var deployOptions = {
+				projectSlugOrId: 'my-project-name',
+				version: '1.0.0-rc-3',
+				releaseNotes: 'Release notes for testing',
+				environmentName: 'DEV-SERVER',
+				comments: 'Deploy releases-123 to DEVSERVER1',
+				variables: {
+					'SourceDir': '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3'
+				}
+			};
+
+			// Create Release
+			return client.helper.simpleCreateReleaseAndDeploy(deployOptions)
+				.then(function (deployment) {
+
+					expect(deployment).to.be.instanceof(Object);
+					expect(deployment.Id).to.be.a('string');
+
+					return deployment;
+				});
+
+		});
+
 	});
 
 	describe('simpleCreateRelease', function () {
