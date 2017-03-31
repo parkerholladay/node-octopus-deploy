@@ -1,6 +1,6 @@
 # octopus-deploy
 
-[![Build Status](https://travis-ci.org/iojohnso/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/iojohnso/node-octopus-deploy)
+[![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
 
 Node script to create a release within Octopus Deploy, and optionally also deploys that release.  
 This package uses the Octopus Deploy REST API.
