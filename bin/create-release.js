@@ -1,58 +1,39 @@
-#! /usr/bin/env node
-'use strict';
+'use strict'
 
-//// Here are the options to specify when calling this script
-var argv = require('yargs')
-    .demand('host', true)
-    .describe('host', 'The base url of your octopus deploy instance (ex: https://deploy.mycompany.com)')
-    .demand('apiKey', true)
-    .describe('apiKey', 'The api key used to connect to octopus deploy.')
-    .demand('projectSlugOrId', true)
-    .describe('projectSlugOrId', 'The id or slug of the project to perform actions against (ex. my-project or projects-123)')
-    .demand('version', true)
-    .describe('version', 'The SemVer of the release you would like to create (ex. 2.0.0-rc-4)')
-    .demand('releaseNotes', true)
-    .describe('releaseNotes', 'The notes you want to associate with this release (ex. Created release as post-build step)')
-    .demand('packageVersion', true)
-    .describe('packageVersion', 'The version of the packages to deploy in this release (ALL must be of this version).')
-    .argv;
+const yargs = require('yargs')
 
-// -------------------------------------------
-// Setup Client
-// -------------------------------------------
-var OctoDeployApi = require('../lib/octopus-deploy');
+const logger = require('../lib/logger')
+const octopusApi = require('../lib/octopus-deploy')
+const createRelease = require('../lib/commands/simple-create-release')
 
-var config = {
-    host: argv.host,
-    apiKey: argv.apiKey // This is used to authorize against the REST Api
-};
+const args = yargs
+  .usage('Usage:\n  $0 [options]')
+  .help('help')
+  .alias('h', 'help')
+  .describe('host', 'The base url of the octopus deploy server')
+  .describe('apiKey', 'Api key used to connect to octopus deploy')
+  .describe('projectSlugOrId', 'The id or slug of the octopus project')
+  .describe('version', 'The SemVer of the release to create')
+  .describe('releaseNotes', 'Notes to associate with the new release')
+  .describe('packageVersion', 'The version of the packages to release')
+  .demandOption(['host', 'apiKey', 'projectSlugOrId', 'version', 'packageVersion'])
+  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --version=2.0.0-rc-4 \\\n --releaseNotes="Created release as post-build step" \\\n --packageVersion=1.0.1`)
+  .argv
 
-var client = new OctoDeployApi(config);
+const { host, apiKey, projectSlugOrId, version, releaseNotes, packageVersion } = args
 
-// -------------------------------------------
-// Create Release
-// -------------------------------------------
-var projectSlugOrId = argv.projectSlugOrId;
-var version = argv.version;
-var releaseNotes = argv.releaseNotes;
-var packageVersion = argv.packageVersion;
+octopusApi.init({ host, apiKey })
 
-var releasePromise = client.helper.simpleCreateRelease(projectSlugOrId, version, releaseNotes, packageVersion);
+logger.log('Creating release...')
 
-releasePromise.then(
-    // Success
-    function (release) {
-        console.log('Release Created...');
-        console.log(release);
-        process.exit(0);
-    },
-    // Error
-    function (error) {
-        console.log('Error when tyring to create release...');
-        if (error.error) {
-            console.log(error.error);
-        } else {
-            console.log(error);
-        }
-        process.exit(1);
-    });
+const params = { projectSlugOrId, version, releaseNotes, packageVersion }
+
+createRelease(params)
+  .then(release => {
+    logger.log(`Created release '${release.Id}'`)
+    process.exit(0)
+  })
+  .catch(err => {
+    logger.log('Failed to create release. Error:', err.message)
+    process.exit(1)
+  })

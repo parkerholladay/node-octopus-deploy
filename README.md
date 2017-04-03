@@ -2,163 +2,173 @@
 
 [![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
 
-Node script to create a release within Octopus Deploy, and optionally also deploys that release.  
-This package uses the Octopus Deploy REST API.
+A set of node scripts to create releases within Octopus Deploy, and optionally deploy those releases.
+This package leverages the Octopus Deploy REST API:
 
-    https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki
+```
+https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki
+```
 
-This module was specifically created in order to initiate a release and deploy from a linux machine.
+These scripts mimic the behavior of Octopus Deploy powershell CLI tools and enable calling octopus from a linux machine.
 
-The primary usage was to be able to call it via the command line, but you could also use it as a library as well.
+The primary purpose is to be able to call the scripts via the command line, but you could also use the module as a library.
 
-# Command Line Usage
+```
+npm install octopus-deploy
+```
 
-Install it globally...
+# CLI usage
 
-    npm install octopus-deploy -g
-    
-## Create Release
+## Create release
 
-Here is an example of creating a release (make into one line)
+```
+octopus-deploy-create-release \
+    --host=https://octopus.acme.com \
+    --apiKey=API-123 \
+    --projectSlugOrId=my-project \
+    --version=2.0.0-rc-4 \
+    --releaseNotes="Test release notes" \
+    --packageVersion=1.0.1
+```
+`releaseNotes` are optional
 
-    octopus-deploy-create-release 
-        --host=https://deploy.mycompany.com 
-        --apiKey=ABC-123 
-        --projectSlugOrId=my-project
-        --version=0.0.0-test-node-od-1 
-        --releaseNotes="Test release notes"
+## Create release and deploy
 
-## Create Release and Deploy
+```
+octopus-deploy-create-release-and-deploy \
+    --host=https://octopus.acme.com \
+    --apiKey=API-123 \
+    --projectSlugOrId=Projects-123 \
+    --version=2.0.0-rc-4 \
+    --releaseNotes="Test release notes" \
+    --packageVersion=1.0.1
+    --environmentName=DEV-SERVER \
+    --comments="Automated Deploy to DEV-SERVER as post-build step" \
+    --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}"
+```
+`releaseNotes`, `comments`, and `variables` are optional
 
-Here is an example of creating a release, then deploying that release (make into one line)
+# Library usage
 
-`comments` and `variables` are optional
+This module uses [bluebird](https://github.com/petkaantonov/bluebird) promises as much as possible.
 
-    octopus-deploy-create-release-and-deploy 
-        --host=https://deploy.mycompany.com 
-        --apiKey=ABC-123 
-        --projectSlugOrId=my-project
-        --version=0.0.0-test-node-od-1 
-        --releaseNotes="Test release notes"
-        --environmentName="DEV-SERVER"
-        --comments="Automated Deploy to DEV-SERVER as post-build step"
-        --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\0.0.0-test-node-od-1 \"}"
-    
-# Library Usage
+## Setup client
 
-If you are looking to use it as a library, you are probably looking to install it locally.
+```
+const octopusApi = require('octopus-deploy')
 
-    npm install octopus-deploy
+const config = {
+    host: 'https://octopus.acme.com',
+    apiKey: 'API-123' // This is used to authorize against the REST API
+}
 
-This module tries to use promises whenever possible, specifically [bluebird](https://github.com/petkaantonov/bluebird) promises.
+octopusApi.init(config)
+```
 
-## Setup Client
+## Commands
 
-    var OctoDeployApi = require('octopus-deploy');
-    
-    var config = {
-        host: 'https://deploy.mycompany.com',
-        apiKey: 'ABC-123' // This is used to authorize against the REST Api
-    };
-    
-    var client = new OctoDeployApi(config);
+The same package version will be used for all deployment steps. This requires ALL the packages referenced by the deploy steps to have the same version.
 
-## Helper
- 
-### Simple - Create Release And Deploy
+### Simple create release
 
-The same package version will be used for all deployment steps. This depends on there existing a package of the specified version for ALL the packages referenced by the steps. 
+```
+const releaseParams = {
+    projectSlugOrId: 'my-project-name',
+    version: '1.0.0-rc.3',
+    releaseNotes: 'Release notes for testing'
+    packageVersion: '1.0.0'
+}
 
-    // Release Information
-    var projectIdOrSlug = 'my-project-name';
-    var version = '1.0.0-rc.3';
-    var releaseNotes = 'Release notes for testing';
-    var packageVersion = version;
-    
-    // Deployment Information
-    var environmentName = 'DEV-SERVER';
-    var comments = 'Deploy releases-123 to DEVSERVER1';
-    // Form Value Example: Source Directory
-    var variables = {
-        'SourceDir': '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3'
-    };
-    
-    // Create Deployment
-    var deploymentPromise = client.helper.simpleCreateReleaseAndDeploy(
-        projectIdOrSlug, version, releaseNotes, environmentName, comments, variables, packageVersion);
-        
-    // Print out deployment
-    deploymentPromise.then(function(deployment) {
-        console.log('Octopus release created and deployed:');
-        console.log(deployment);
-    }, function(reason) {
-        console.log('Octopus release creation or deployment falied!');
-        console.log(reason);
-    });
+// Create release
+simpleCreateRelease(releaseParams)
+    .then((release) => {
+        console.log('Octopus release created:')
+        console.log(release)
+    }, (reason) => {
+        console.log('Octopus release creation falied!')
+        console.log(reason)
+    })
+```
 
-## Release
+### Simple create release and deploy
 
-### Create
+```
+const releaseParams = {
+    projectSlugOrId: 'my-project-name',
+    version: '1.0.0-rc.3',
+    releaseNotes: 'Release notes for testing'
+    packageVersion: '1.0.0'
+}
+
+const deployParams = {
+    environmentName: 'DEV-SERVER'
+    comments: 'Deploy releases-123 to DEVSERVER1'
+    variables: {
+        'SourceDir': '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3' // Form value example: source directory
+    }
+}
+
+// Create and deploy release
+simpleCreateReleaseAndDeploy(releaseParams, deployParams)
+    .then((deployment) => {
+        console.log('Octopus release created and deployed:')
+        console.log(deployment)
+    }, (reason) => {
+        console.log('Octopus release creation or deployment falied!')
+        console.log(reason)
+    })
+```
+
+## API
+
+### Create release
 
 Selected packages for the deployment steps are specified more explicitly. For more information refer to [this Octopus support issue](http://help.octopusdeploy.com/discussions/problems/35372-create-release-a-version-must-be-specified-for-every-included-nuget-package).
 
-    var projectIdOrSlug = 'my-project-name';
-    var version = '1.0.0-rc.3';
-    var releaseNotes = 'Release notes for testing';
-    var selectedPackages = 
-        [{
-            "StepName": "My octopus process first step",
-            "Version": "1.0.0.0"
-        }, {
-            "StepName": "My octopus process second step",
-            "Version": "1.0.2-rc.1"
-        }];
+```
+const projectId = 'Projects-123'
+const version = '1.0.0-rc.3'
+const releaseNotes = 'Release notes for testing'
+const selectedPackages = [
+    {
+        StepName: 'My octopus process first step',
+        Version: '1.0.0.0'
+    },
+    {
+        StepName: 'My octopus process second step',
+        Version: '1.0.2-rc.1'
+    }
+]
 
-    releasePromise = client.release.create(projectIdOrSlug, version, releaseNotes, selectedPackages);
-    
-    releasePromise.then(function (release) {
-        console.log('Octopus release Created:');
-        console.log(release);
-    }, function(reason) {
-        console.log('Octopus release creation falied!');
-        console.log(reason);
-    });
+octopusApi.releases.create(projectId, version, releaseNotes, selectedPackages)
+    .then((release) => {
+        console.log('Octopus release created:')
+        console.log(release)
+    }, (reason) => {
+        console.log('Octopus release creation falied!')
+        console.log(reason)
+    })
+```
 
-## Other
+### Other
 
-Other methods are exposed but I didn't want to take the time to document them right now.
-You can find them in the `.\lib` folder. 
-Notice not all resource/methods are implemented 
-(Feel free to fork and submit pull request for your needs).
+All implemented API endpoints can be found in the `./lib/api` directory. _Notice not all Octopus Deploy endpionts are implemented._
 
 - deployment
 - environment
-- helper (custom mashup of multiple calls)
-- project
 - process
+- project
 - release
 - variable
 
 # Testing
 
-This project uses gulp for running tests.  All tests reside in the `.\test` folder.
-
-To run tests...
-
-    gulp test
-    
-To run tests in a TDD mode with a watch...
-
-    gulp dev
-    
-# TODO
-
-There are a few error cases that do not have test cases right now.
+This module uses mocha tests. Simply run `npm test` or `npm run test:watch`.
 
 # Contributing
 
 If there are other API functions you need, feel free to fork the project,
-submit a pull request, and I'll try to keep up to date.
+submit a pull request, and I'll try to keep up-to-date.
 
 # License
 

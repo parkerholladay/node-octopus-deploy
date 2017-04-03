@@ -1,0 +1,9 @@
+test
+__specs__
+.editorconfig
+.gitignore
+.jshintrc
+.npmignore
+.npmrc
+.nvmrc
+.travis.yml
