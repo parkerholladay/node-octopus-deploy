@@ -35,6 +35,6 @@ createRelease(params)
     process.exit(0)
   })
   .catch(err => {
-    logger.log('Failed to create release. Error:', err.message)
+    logger.log('Failed to create release. Error:', err)
     process.exit(1)
   })

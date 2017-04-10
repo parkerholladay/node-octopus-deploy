@@ -27,7 +27,7 @@ const args = yargs
 const { host, apiKey, projectSlugOrId, version, releaseNotes, packageVersion, environmentName, comments } = args
 const variables = args.variables
   ? JSON.parse(args.variables)
-  : null
+  : {}
 
 octopusApi.init({ host, apiKey })
 
