@@ -1,8 +1,8 @@
 test
 __specs__
 .editorconfig
+.eslintrc
 .gitignore
-.jshintrc
 .npmignore
 .npmrc
 .nvmrc
