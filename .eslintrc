@@ -1,0 +1,39 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "env": {
+    "mocha": true
+  },
+  "plugins": [
+    "mocha"
+  ],
+  "globals": {
+    "expect": true
+  },
+  "rules": {
+    "curly": "off",
+    "generator-star-spacing": "off",
+    "mocha/no-exclusive-tests": "error",
+    "no-unused-expressions": "off",
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "yield-star-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ]
+  }
+}

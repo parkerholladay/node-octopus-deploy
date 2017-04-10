@@ -4,6 +4,7 @@
   "description": "Node script to create a release within Octopus Deploy, and optionally deploy that release. This package will use the Octopus Deploy REST API in order to be able to deploy from a linux machine.",
   "main": "./lib/octopus-deploy.js",
   "scripts": {
+    "lint": "eslint ./",
     "test": "mocha ./**/*.spec.js",
     "test:watch": "npm run test -- --watch"
   },
@@ -35,12 +36,11 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "gulp": "3.9.1",
-    "gulp-cached": "1.1.1",
-    "gulp-help": "1.6.1",
-    "gulp-jshint": "2.0.4",
-    "jshint": "2.9.4",
-    "jshint-stylish": "2.2.1",
+    "eslint": "3.19.0",
+    "eslint-config-standard": "7.1.0",
+    "eslint-plugin-mocha": "4.9.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "2.1.1",
     "mocha": "3.2.0",
     "sinon": "1.17.7",
     "sinon-chai": "2.9.0"
