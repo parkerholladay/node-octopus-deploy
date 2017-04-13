@@ -31,14 +31,14 @@ const variables = args.variables
 
 octopusApi.init({ host, apiKey })
 
-logger.info('Creating release and deploying...')
+logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
 
 const releaseParams = { projectSlugOrId, version, releaseNotes, packageVersion }
 const deployParams = { environmentName, comments, variables }
 
 createReleaseAndDeploy(releaseParams, deployParams)
   .then(deploy => {
-    logger.info(`Created release '${deploy.ReleaseId}' and deployed '${deploy.Id}'`)
+    logger.info(`Finished creating release '${deploy.ReleaseId}' and deployed '${deploy.Id}'. ${projectSlugOrId} ${version}`)
     process.exit(0)
   })
   .catch(err => {

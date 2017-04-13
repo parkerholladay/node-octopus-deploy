@@ -1,9 +1,10 @@
-test
-__specs__
 .editorconfig
 .eslintrc
 .gitignore
+node_modules
 .npmignore
 .npmrc
 .nvmrc
+__specs__
 .travis.yml
+test

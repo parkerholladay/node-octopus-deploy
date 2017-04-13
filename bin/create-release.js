@@ -25,13 +25,13 @@ const { host, apiKey, projectSlugOrId, version, releaseNotes, packageVersion } =
 
 octopusApi.init({ host, apiKey })
 
-logger.info('Creating release...')
+logger.info(`Creating release for project '${projectSlugOrId}'...`)
 
 const params = { projectSlugOrId, version, releaseNotes, packageVersion }
 
 createRelease(params)
   .then(release => {
-    logger.info(`Created release '${release.Id}'`)
+    logger.info(`Finished creating release '${release.Id}'. ${projectSlugOrId} ${version}`)
     process.exit(0)
   })
   .catch(err => {

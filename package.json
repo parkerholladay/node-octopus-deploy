@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint ./",
     "test": "mocha ./**/*.spec.js",
+    "test:cover": "nyc --all npm run test",
     "test:watch": "npm run test -- --watch",
     "precommit": "npm run lint && npm run test"
   },
@@ -44,7 +45,16 @@
     "eslint-plugin-standard": "2.1.1",
     "husky": "0.13.3",
     "mocha": "3.2.0",
+    "nyc": "^10.2.0",
     "sinon": "1.17.7",
     "sinon-chai": "2.9.0"
+  },
+  "nyc": {
+    "include": [
+      "lib/**/*.js"
+    ],
+    "exclude": [
+      "**/__specs__"
+    ]
   }
 }

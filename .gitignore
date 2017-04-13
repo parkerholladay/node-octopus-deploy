@@ -1,6 +1,9 @@
-node_modules
+coverage
 dist
-temp
-logs
-*.log
 .idea
+logs
+node_modules
+.nyc_output
+temp
+
+*.log
