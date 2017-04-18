@@ -1,0 +1,42 @@
+{
+  "Id": "Machines-123",
+  "Name": "i-003d12b210f86f535",
+  "Thumbprint": "120DE6E5ABB0C47DB1A7A7114E40EB59BF63EA63",
+  "Uri": "https://192.168.1.2:10933/",
+  "IsDisabled": false,
+  "EnvironmentIds": [
+    "Environments-123"
+  ],
+  "Roles": [
+    "role-one"
+  ],
+  "MachinePolicyId": "MachinePolicies-123",
+  "TenantIds": [],
+  "TenantTags": [],
+  "Status": "Online",
+  "HealthStatus": "Healthy",
+  "HasLatestCalamari": true,
+  "StatusSummary": "Octopus was able to successfully establish a connection with this machine on Thursday, January 1, 2017 12:00 PM",
+  "IsInProcess": false,
+  "Endpoint": {
+    "CommunicationStyle": "TentaclePassive",
+    "Uri": "https://192.168.1.2:10933/",
+    "ProxyId": null,
+    "Thumbprint": "121DE7E5ABB0C47DF1A7A7104E40EB59BA63FA63",
+    "TentacleVersionDetails": {
+      "UpgradeLocked": false,
+      "Version": "3.12.2",
+      "UpgradeSuggested": false,
+      "UpgradeRequired": false
+    },
+    "Id": null,
+    "LastModifiedOn": null,
+    "LastModifiedBy": null,
+    "Links": {}
+  },
+  "Links": {
+    "Self": "/api/machines/Machines-123",
+    "Connection": "/api/machines/Machines-123/connection",
+    "TasksTemplate": "/api/machines/Machines-123/tasks{?skip}"
+  }
+}
