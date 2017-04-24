@@ -45,8 +45,9 @@ octopus-deploy-create-release-and-deploy \
     --environmentName=DEV-SERVER \
     --comments="Automated Deploy to DEV-SERVER as post-build step" \
     --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}"
+    --machineIds="Machines-123,Machines-456"
 ```
-`releaseNotes`, `comments`, and `variables` are optional
+`releaseNotes`, `comments`, `variables`, and `machineIds` are optional
 
 # Library usage
 

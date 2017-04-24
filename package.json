@@ -2,7 +2,7 @@
   "name": "octopus-deploy",
   "version": "3.0.0",
   "description": "Node script to create a release within Octopus Deploy, and optionally deploy that release. This package will use the Octopus Deploy REST API in order to be able to deploy from a linux machine.",
-  "main": "./lib/octopus-deploy.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint ./",
     "test": "mocha ./**/*.spec.js",
@@ -23,7 +23,8 @@
     "octopus",
     "deploy",
     "linux",
-    "rest"
+    "rest",
+    "cli"
   ],
   "license": "MIT",
   "bugs": {
@@ -45,7 +46,7 @@
     "eslint-plugin-standard": "2.1.1",
     "husky": "0.13.3",
     "mocha": "3.2.0",
-    "nyc": "^10.2.0",
+    "nyc": "10.2.0",
     "sinon": "1.17.7",
     "sinon-chai": "2.9.0"
   },
