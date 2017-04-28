@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint ./",
     "test": "mocha ./**/*.spec.js",
-    "test:cover": "nyc --all npm run test",
+    "test:cover": "nyc npm run test",
     "test:watch": "npm run test -- --watch",
     "precommit": "npm run lint && npm run test"
   },
@@ -34,28 +34,21 @@
   "dependencies": {
     "bluebird": "3.5.0",
     "request": "2.81.0",
-    "request-promise": "4.2.0",
-    "yargs": "7.0.2"
+    "request-promise": "4.2.1",
+    "yargs": "8.0.2"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "eslint": "3.19.0",
-    "eslint-config-standard": "7.1.0",
-    "eslint-plugin-mocha": "4.9.0",
+    "chai": "4.0.2",
+    "eslint": "4.0.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-mocha": "4.11.0",
+    "eslint-plugin-node": "5.0.0",
     "eslint-plugin-promise": "3.5.0",
-    "eslint-plugin-standard": "2.1.1",
-    "husky": "0.13.3",
-    "mocha": "3.2.0",
-    "nyc": "10.2.0",
-    "sinon": "1.17.7",
-    "sinon-chai": "2.9.0"
-  },
-  "nyc": {
-    "include": [
-      "lib/**/*.js"
-    ],
-    "exclude": [
-      "**/__specs__"
-    ]
+    "eslint-plugin-standard": "3.0.1",
+    "husky": "0.13.4",
+    "mocha": "3.4.2",
+    "nyc": "11.0.2",
+    "sinon": "2.3.5",
+    "sinon-chai": "2.11.0"
   }
 }

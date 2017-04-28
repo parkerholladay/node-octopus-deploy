@@ -1,0 +1,9 @@
+{
+  "all": true,
+  "exclude": [
+    "**/__specs__"
+  ],
+  "include": [
+    "lib/**/*.js"
+  ]
+}
