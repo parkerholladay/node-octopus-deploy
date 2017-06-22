@@ -1,17 +1,21 @@
 {
   "extends": [
-    "standard"
+    "standard",
+    "plugin:promise/recommended",
+    "plugin:node/recommended"
   ],
   "env": {
     "mocha": true
   },
   "plugins": [
-    "mocha"
+    "mocha",
+    "node"
   ],
   "globals": {
     "expect": true
   },
   "rules": {
+    "array-bracket-spacing": "error",
     "curly": "off",
     "generator-star-spacing": "off",
     "mocha/no-exclusive-tests": "error",
@@ -23,6 +27,10 @@
         "args": "none",
         "ignoreRestSiblings": true
       }
+    ],
+    "standard/object-curly-even-spacing": [
+      2,
+      "always"
     ],
     "space-before-function-paren": [
       "error",

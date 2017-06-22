@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 'use strict'
 
 const yargs = require('yargs')
@@ -32,9 +32,9 @@ const params = { projectSlugOrId, version, releaseNotes, packageVersion }
 createRelease(params)
   .then(release => {
     logger.info(`Finished creating release '${release.Id}'. ${projectSlugOrId} ${version}`)
-    process.exit(0)
+    return release
   })
   .catch(err => {
     logger.error('Failed to create release. Error:', err)
-    process.exit(1)
+    throw err
   })

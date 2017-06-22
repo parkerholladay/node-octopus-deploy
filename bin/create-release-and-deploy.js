@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 'use strict'
 
 const yargs = require('yargs')
@@ -43,9 +43,9 @@ const deployParams = { environmentName, comments, variables, machineIds }
 createReleaseAndDeploy(releaseParams, deployParams)
   .then(deploy => {
     logger.info(`Finished creating release '${deploy.ReleaseId}' and deployed '${deploy.Id}'. ${projectSlugOrId} ${version}`)
-    process.exit(0)
+    return deploy
   })
   .catch(err => {
     logger.error('Failed to create release and deploy. Error:', err.message)
-    process.exit(1)
+    throw err
   })
