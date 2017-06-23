@@ -27,10 +27,10 @@ octopus-deploy-create-release \
     --apiKey=API-123 \
     --projectSlugOrId=my-project \
     --version=2.0.0-rc-4 \
-    --releaseNotes="Test release notes" \
-    --packageVersion=1.0.1
+    --packageVersion=1.0.1 \
+    --releaseNotes="Test release notes"
 ```
-`releaseNotes` are optional
+`packageVersion` and `releaseNotes` are optional
 
 ## Create release and deploy
 
@@ -40,14 +40,16 @@ octopus-deploy-create-release-and-deploy \
     --apiKey=API-123 \
     --projectSlugOrId=Projects-123 \
     --version=2.0.0-rc-4 \
+    --packageVersion=1.0.1 \
     --releaseNotes="Test release notes" \
-    --packageVersion=1.0.1
     --environmentName=DEV-SERVER \
     --comments="Automated Deploy to DEV-SERVER as post-build step" \
-    --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}"
+    --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
     --machineIds="Machines-123,Machines-456"
 ```
-`releaseNotes`, `comments`, `variables`, and `machineIds` are optional
+`packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
+
+_Note: If `packageVersion` is omitted, `version` will be used for all package versions when creating the release._
 
 # Library usage
 
@@ -68,7 +70,7 @@ octopusApi.init(config)
 
 ## Commands
 
-The same package version will be used for all deployment steps. This requires ALL the packages referenced by the deploy steps to have the same version.
+The same package version will be used for all deployment steps. This requires that _ALL_ packages referenced by the deploy steps have the same version.
 
 ### Simple create release
 
@@ -76,8 +78,8 @@ The same package version will be used for all deployment steps. This requires AL
 const releaseParams = {
     projectSlugOrId: 'my-project-name',
     version: '1.0.0-rc.3',
+    packageVersion: '1.0.0',
     releaseNotes: 'Release notes for testing'
-    packageVersion: '1.0.0'
 }
 
 // Create release
@@ -86,7 +88,7 @@ simpleCreateRelease(releaseParams)
         console.log('Octopus release created:')
         console.log(release)
     }, (reason) => {
-        console.log('Octopus release creation falied!')
+        console.log('Octopus release creation failed!')
         console.log(reason)
     })
 ```
@@ -97,15 +99,15 @@ simpleCreateRelease(releaseParams)
 const releaseParams = {
     projectSlugOrId: 'my-project-name',
     version: '1.0.0-rc.3',
+    packageVersion: '1.0.0',
     releaseNotes: 'Release notes for testing'
-    packageVersion: '1.0.0'
 }
 
 const deployParams = {
     environmentName: 'DEV-SERVER'
     comments: 'Deploy releases-123 to DEVSERVER1'
     variables: {
-        'SourceDir': '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3' // Form value example: source directory
+        SourceDir: '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3' // Form value example: source directory
     }
 }
 
@@ -115,7 +117,7 @@ simpleCreateReleaseAndDeploy(releaseParams, deployParams)
         console.log('Octopus release created and deployed:')
         console.log(deployment)
     }, (reason) => {
-        console.log('Octopus release creation or deployment falied!')
+        console.log('Octopus release creation or deployment failed!')
         console.log(reason)
     })
 ```
@@ -153,18 +155,18 @@ octopusApi.releases.create(projectId, version, releaseNotes, selectedPackages)
 
 ### Other
 
-All implemented API endpoints can be found in the `./lib/api` directory. _Notice not all Octopus Deploy endpionts are implemented._
+All implemented API endpoints can be found in the `./lib/api` directory. _Note: Not all Octopus Deploy endpionts are implemented._
 
-- deployment
-- environment
-- process
-- project
-- release
-- variable
+- `deployment`
+- `environment`
+- `process`
+- `project`
+- `release`
+- `variable`
 
 # Testing
 
-This module uses mocha tests. Simply run `npm test` or `npm run test:watch`.
+This module uses mocha tests. Simply run `npm test`, `npm run test:watch`, or `npm run test:cover`.
 
 # Contributing
 

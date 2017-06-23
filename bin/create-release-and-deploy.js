@@ -22,8 +22,8 @@ const args = yargs
   .describe('comments', 'Deploy comments')
   .describe('variables', 'Deploy variables')
   .describe('machineIds', 'Comma separated list of machine ids to target')
-  .demandOption(['host', 'apiKey', 'projectSlugOrId', 'version', 'packageVersion', 'environmentName'])
-  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --version=2.0.0-rc-4 \\\n --releaseNotes="Created release as post-build step" \\\n --packageVersion=1.0.1 \\\n --environmentName=DEV-SERVER \\\n --comments="Automated deploy to DEV-SERVER as post-build step" \\\n --variables="{\\"SourceDir\\": \\"\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3\\"}" \\\n --machineIds="Machines-123,Machines-456"`)
+  .demandOption(['host', 'apiKey', 'projectSlugOrId', 'version', 'environmentName'])
+  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --version=2.0.0-rc-4 \\\n --packageVersion=1.0.1 \\\n --releaseNotes="Created release as post-build step" \\\n --environmentName=DEV-SERVER \\\n --comments="Automated deploy to DEV-SERVER as post-build step" \\\n --variables="{\\"SourceDir\\": \\"\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3\\"}" \\\n --machineIds="Machines-123,Machines-456"`)
   .argv
 
 const { host, apiKey, projectSlugOrId, version, releaseNotes, packageVersion, environmentName, comments } = args
