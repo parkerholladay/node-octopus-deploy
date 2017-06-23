@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint ./",
     "test": "mocha ./**/*.spec.js",
+    "test:ci": "npm run test -- --reporter tap",
     "test:cover": "nyc npm run test",
     "test:watch": "npm run test -- --watch",
     "precommit": "npm run lint && npm run test"
