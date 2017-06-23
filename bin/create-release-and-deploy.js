@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict'
+/* eslint-disable no-process-exit */
 
 const yargs = require('yargs')
 
@@ -47,5 +48,7 @@ createReleaseAndDeploy(releaseParams, deployParams)
   })
   .catch(err => {
     logger.error('Failed to create release and deploy. Error:', err.message)
-    throw err
+    process.exit(1)
   })
+
+/* eslint-enable no-process-exit */

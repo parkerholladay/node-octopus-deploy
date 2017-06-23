@@ -16,7 +16,7 @@
     "octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js"
   },
   "engines": {
-    "node": ">=6.10"
+    "node": ">=6.4"
   },
   "repository": {
     "type": "git",
