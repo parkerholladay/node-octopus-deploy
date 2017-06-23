@@ -1,6 +1,6 @@
 {
   "name": "octopus-deploy",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Node script to create a release within Octopus Deploy, and optionally deploy that release. This package will use the Octopus Deploy REST API in order to be able to deploy from a linux machine.",
   "main": "index.js",
   "scripts": {
