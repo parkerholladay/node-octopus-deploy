@@ -32,7 +32,7 @@ const params = { projectSlugOrId, version, releaseNotes, packageVersion }
 
 createRelease(params)
   .then(release => {
-    logger.info(`Finished creating release '${release.Id}'. ${projectSlugOrId} ${version}`)
+    logger.info(`Finished creating release '${release.id}'. ${projectSlugOrId} ${version}`)
     return release
   })
   .catch(err => {

@@ -159,6 +159,7 @@ All implemented API endpoints can be found in the `./lib/api` directory. _Note: 
 
 - `deployment`
 - `environment`
+- `machine`
 - `process`
 - `project`
 - `release`
@@ -170,8 +171,10 @@ This module uses mocha tests. Simply run `npm test`, `npm run test:watch`, or `n
 
 # Contributing
 
-If there are other API functions you need, feel free to fork the project,
-submit a pull request, and I'll try to keep up-to-date.
+If there are other API functions you need, feel free to fork the project, add some tests along with the desired endpoint, and submit a pull request.
+I'll try to stay on top of things as much as possible.
+
+All commits will run the pre-commit hook which checks linting and runs all tests.
 
 # License
 

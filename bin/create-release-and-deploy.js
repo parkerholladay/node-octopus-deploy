@@ -43,7 +43,7 @@ const deployParams = { environmentName, comments, variables, machineIds }
 
 createReleaseAndDeploy(releaseParams, deployParams)
   .then(deploy => {
-    logger.info(`Finished creating release '${deploy.ReleaseId}' and deployed '${deploy.Id}'. ${projectSlugOrId} ${version}`)
+    logger.info(`Finished creating release '${deploy.releaseId}' and deployed '${deploy.id}'. ${projectSlugOrId} ${version}`)
     return deploy
   })
   .catch(err => {
