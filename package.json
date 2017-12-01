@@ -36,25 +36,25 @@
   },
   "homepage": "https://github.com/parkerholladay/node-octopus-deploy",
   "dependencies": {
-    "bluebird": "3.5.0",
+    "bluebird": "3.5.1",
     "json-casing": "1.0.6",
-    "request": "2.81.0",
-    "request-promise": "4.2.1",
+    "request": "2.83.0",
+    "request-promise": "4.2.2",
     "yargs": "8.0.2"
   },
   "devDependencies": {
-    "chai": "4.0.2",
-    "eslint": "4.0.0",
+    "chai": "4.1.2",
+    "eslint": "4.12.0",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.5.0",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-mocha": "4.11.0",
-    "eslint-plugin-node": "5.0.0",
-    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-node": "5.2.1",
+    "eslint-plugin-promise": "3.6.0",
     "eslint-plugin-standard": "3.0.1",
-    "husky": "0.14.0",
-    "mocha": "3.4.2",
-    "nyc": "11.0.2",
-    "sinon": "2.3.5",
-    "sinon-chai": "2.11.0"
+    "husky": "0.14.3",
+    "mocha": "4.0.1",
+    "nyc": "11.3.0",
+    "sinon": "4.1.2",
+    "sinon-chai": "2.14.0"
   }
 }
