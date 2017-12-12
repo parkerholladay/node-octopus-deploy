@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
     "test": "mocha ./**/*.spec.js",
     "test:ci": "npm run test -- --reporter tap",
     "test:cover": "nyc npm run test",

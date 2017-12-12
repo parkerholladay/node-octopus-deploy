@@ -17,7 +17,15 @@
   },
   "rules": {
     "array-bracket-spacing": "error",
-    "curly": "off",
+    "arrow-parens": [
+      2,
+      "as-needed"
+    ],
+    "curly": [
+      "error",
+      "multi-or-nest",
+      "consistent"
+    ],
     "generator-star-spacing": "off",
     "mocha/no-exclusive-tests": "error",
     "no-unused-expressions": "off",
