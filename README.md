@@ -83,7 +83,7 @@ const releaseParams = {
 }
 
 // Create release
-simpleCreateRelease(releaseParams)
+octopusApi.simpleCreateRelease(releaseParams)
     .then((release) => {
         console.log('Octopus release created:')
         console.log(release)
