@@ -3,8 +3,8 @@
 
 const yargs = require('yargs')
 
-const logger = require('../lib/logger')
-const octopusApi = require('../lib/octopus-deploy')
+const octo = require('../lib')
+const logger = require('../lib/utils/logger')
 const createReleaseAndDeploy = require('../lib/commands/simple-create-release-and-deploy')
 
 const args = yargs
@@ -32,7 +32,7 @@ const machineIds = args.machineIds
   ? args.machineIds.split(',')
   : null
 
-octopusApi.init({ host, apiKey })
+octo.api.init({ host, apiKey })
 
 logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
 

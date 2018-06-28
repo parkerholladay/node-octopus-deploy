@@ -1,12 +1,12 @@
 {
   "name": "octopus-deploy",
   "version": "4.0.0",
-  "description": "Node script to create a release within Octopus Deploy, and optionally deploy that release. This package will use the Octopus Deploy REST API in order to be able to deploy from a linux machine.",
+  "description": "Node scripts to package up applications, and create a release within Octopus Deploy, as well as deploy that release. This package leverages the Octopus Deploy REST API in order to deploy from Windows and non-Windows machines.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "test": "mocha ./**/*.spec.js",
+    "test": "mocha \"{,!(node_modules)/**/}*.spec.js\"",
     "test:ci": "npm run test -- --reporter tap",
     "test:cover": "nyc npm run test",
     "test:watch": "npm run test -- --watch",
@@ -14,7 +14,8 @@
   },
   "bin": {
     "octopus-deploy-create-release": "./bin/create-release.js",
-    "octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js"
+    "octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js",
+    "octopus-deploy-pack-and-push": ".bin/pack-and-push.js"
   },
   "engines": {
     "node": ">=6.4"
@@ -24,12 +25,17 @@
     "url": "https://github.com/parkerholladay/node-octopus-deploy.git"
   },
   "keywords": [
-    "node",
-    "octopus",
+    "cli",
+    "cross-platform",
     "deploy",
     "linux",
-    "rest",
-    "cli"
+    "node",
+    "octopus",
+    "octo",
+    "octopack",
+    "pack",
+    "package",
+    "rest"
   ],
   "license": "MIT",
   "bugs": {
@@ -37,7 +43,9 @@
   },
   "homepage": "https://github.com/parkerholladay/node-octopus-deploy",
   "dependencies": {
+    "archiver": "2.1.1",
     "bluebird": "3.5.1",
+    "glob-stream": "6.1.0",
     "json-casing": "1.0.6",
     "request": "2.83.0",
     "request-promise": "4.2.2",
@@ -53,7 +61,7 @@
     "eslint-plugin-promise": "3.6.0",
     "eslint-plugin-standard": "3.0.1",
     "husky": "0.14.3",
-    "mocha": "4.0.1",
+    "mocha": "5.2.0",
     "nyc": "11.3.0",
     "sinon": "4.1.2",
     "sinon-chai": "2.14.0"
