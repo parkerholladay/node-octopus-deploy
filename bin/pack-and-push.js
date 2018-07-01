@@ -4,41 +4,57 @@
 
 const yargs = require('yargs')
 
-const octo = require('../lib')
-// const logger = require('../lib/utils/logger')
+const logger = require('../lib/utils/logger')
+const octopack = require('../lib/octo-pack')
+const publish = require('../lib/octo-push')
+const octopus = require('../lib/octopus-deploy')
 
 const args = yargs
   .usage('Usage:\n  $0 [options]')
   .option('host', { describe: 'The base url of the octopus deploy server', demandOption: true })
   .option('apiKey', { describe: 'Api key used to connect to octopus deploy', demandOption: true })
   .option('globs', { describe: `A list of globs separated by '::' describing the files to package`, demandOption: true })
-  .option('pkgName', { describe: 'The name of the package', demandOption: true })
-  .option('pkgVersion', { describe: 'The SemVer of the package', demandOption: true })
+  .option('packageName', { describe: 'The name of the package', demandOption: true })
+  .option('packageVersion', { describe: 'The SemVer of the package', demandOption: true })
   .option('zip', { describe: 'Optional flag to use .zip format instead of .tar.gz', default: false })
   .help()
   .alias('h', 'help')
-  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --base=my-dir \\\n --globs='**/build/*::!**/node_modules/**' \\\n --pkgName=my-package \\\n --pkgVersion=2.0.0-rc-4 \\\n --zip`)
+  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --globs='**/build/*::!**/node_modules/**' \\\n --packageName=my-package \\\n --packageVersion=2.0.0-rc-4 \\\n --zip`)
   .argv
 
-// const { host, apiKey, globs, pkgName: name, pkgVersion: version, zip } = args
-const { globs, zip } = args
+const { host, apiKey, globs, packageName: name, packageVersion: version, zip } = args
 const globList = globs.split('::')
 
-// logger.info(`Packing '${base}'...`)
+octopus.init({ host, apiKey })
 
-const extension = zip ? '.zip' : '.tar.gz'
-const packOptions = { zip, extension }
-octo.pack(globList, packOptions)
-// .then(pkgName => {
-//   logger.info(`Finished packaging '${pkgName}'`)
-//   return pkgName
-// })
-// .catch(err => {
-//   logger.error('Failed to package app', err)
+const packageNameAndVersion = `${name} - ${version}`
+logger.info(`Packing '${packageNameAndVersion}'...`)
 
-//   /* eslint-disable no-process-exit */
-//   process.exit(1)
-//   /* eslint-enable no-process-exit */
-// })
+const extension = zip ? 'zip' : 'tar.gz'
+const packOptions = { zip }
+
+try {
+  const archive = octopack(globList, packOptions)
+
+  const publishParams = { name, version, extension, stream: archive }
+  publish(publishParams)
+    .then(pkg => {
+      logger.info(`Published package '${pkg.id}${pkg.fileExtension}'`)
+      return pkg
+    })
+    .catch(() => {
+      logger.error(`Failed to publish '${packageNameAndVersion}'`)
+
+      /* eslint-disable no-process-exit */
+      process.exit(1)
+      /* eslint-enable no-process-exit */
+    })
+} catch (err) {
+  logger.error(`Failed to pack '${packageNameAndVersion}'`, err.message)
+
+  /* eslint-disable no-process-exit */
+  process.exit(1)
+  /* eslint-enable no-process-exit */
+}
 
 /* eslint-enable node/shebang */

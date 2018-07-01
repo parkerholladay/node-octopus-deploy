@@ -52,6 +52,20 @@ octopus-deploy-create-release-and-deploy \
 
 _Note: If `packageVersion` is omitted, `version` will be used for all package versions when creating the release._
 
+## Pack and push
+
+```
+octopus-deploy-pack-and-push \
+    --host=https://octopus.acme.com \
+    --apiKey=API-123 \
+    --globs="./src/**::!**/node_modules/**" \
+    --packageName=my-package \
+    --packageVersion=1.0.1 \
+    --zip
+```
+`zip` is optional
+`globs` is a `::` separated list of file globs describing the files to package
+
 # Library usage
 
 This module uses [bluebird](https://github.com/petkaantonov/bluebird) promises as much as possible.
@@ -161,6 +175,7 @@ All implemented API endpoints can be found in the `./lib/api` directory. _Note: 
 - `deployment`
 - `environment`
 - `machine`
+- `package`
 - `process`
 - `project`
 - `release`
