@@ -1,6 +1,7 @@
 # octopus-deploy
 
 [![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
+[![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
 
 A set of node scripts to create releases within Octopus Deploy, and optionally deploy those releases.
 This package leverages the Octopus Deploy REST API:
