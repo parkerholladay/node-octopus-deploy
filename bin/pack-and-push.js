@@ -16,13 +16,14 @@ const args = yargs
   .option('globs', { describe: `A list of globs separated by '::' describing the files to package`, demandOption: true })
   .option('packageName', { describe: 'The name of the package', demandOption: true })
   .option('packageVersion', { describe: 'The SemVer of the package', demandOption: true })
+  .option('replace', { describe: 'Optional flag to replace package if it exists', default: false })
   .option('zip', { describe: 'Optional flag to use .zip format instead of .tar.gz', default: false })
   .help()
   .alias('h', 'help')
   .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --globs='**/build/*::!**/node_modules/**' \\\n --packageName=my-package \\\n --packageVersion=2.0.0-rc-4 \\\n --zip`)
   .argv
 
-const { host, apiKey, globs, packageName: name, packageVersion: version, zip } = args
+const { host, apiKey, globs, packageName: name, packageVersion: version, replace, zip } = args
 const globList = globs.split('::')
 
 octopus.init({ host, apiKey })
@@ -36,7 +37,7 @@ const packOptions = { zip }
 try {
   const archive = octopack(globList, packOptions)
 
-  const publishParams = { name, version, extension, stream: archive }
+  const publishParams = { name, version, extension, replace, stream: archive }
   publish(publishParams)
     .then(pkg => {
       logger.info(`Published package '${pkg.id}${pkg.fileExtension}'`)

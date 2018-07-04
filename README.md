@@ -61,9 +61,11 @@ octopus-deploy-pack-and-push \
     --globs="./src/**::!**/node_modules/**" \
     --packageName=my-package \
     --packageVersion=1.0.1 \
+    --replace \
     --zip
 ```
-`zip` is optional
+`replace` is optional and will replace an existing package if one exists
+`zip` is optional and creates a `.zip` file instead of `.tar.gz`
 `globs` is a `::` separated list of file globs describing the files to package
 
 # Library usage
