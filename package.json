@@ -15,7 +15,7 @@
   "bin": {
     "octopus-deploy-create-release": "./bin/create-release.js",
     "octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js",
-    "octopus-deploy-pack-and-push": ".bin/pack-and-push.js"
+    "octopus-deploy-pack-and-push": "./bin/pack-and-push.js"
   },
   "engines": {
     "node": ">=6.4"
