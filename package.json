@@ -6,11 +6,11 @@
   "scripts": {
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
+    "precommit": "npm run lint && npm run test",
     "test": "mocha \"{,!(node_modules)/**/}*.spec.js\"",
     "test:ci": "npm run test -- --reporter tap",
     "test:cover": "nyc npm run test",
-    "test:watch": "npm run test -- --watch",
-    "precommit": "npm run lint && npm run test"
+    "test:watch": "npm run test -- --watch"
   },
   "bin": {
     "octopus-deploy-create-release": "./bin/create-release.js",

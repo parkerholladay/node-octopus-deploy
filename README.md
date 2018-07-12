@@ -58,14 +58,17 @@ _Note: If `packageVersion` is omitted, `version` will be used for all package ve
 octopus-deploy-pack-and-push \
     --host=https://octopus.acme.com \
     --apiKey=API-123 \
-    --globs="./src/**::!**/node_modules/**" \
     --packageName=my-package \
     --packageVersion=1.0.1 \
+    --globs="./src/**::./node_modules/**::!**/*.spec.*" \
+    --base="./" \
     --replace \
     --zip
 ```
 `replace` is optional and will replace an existing package if one exists
+
 `zip` is optional and creates a `.zip` file instead of `.tar.gz`
+
 `globs` is a `::` separated list of file globs describing the files to package
 
 # Library usage
