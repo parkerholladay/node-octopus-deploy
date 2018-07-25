@@ -35,13 +35,28 @@ logger.info(`Packing '${packageNameAndVersion}'...`)
 const extension = zip ? 'zip' : 'tar.gz'
 const packOptions = { base, zip }
 
+function getFileSizeString(bytes) {
+  const units = ['B', 'kB', 'MB', 'GB', 'TB']
+  if (bytes < 1024) return `${bytes} ${units[0]}`
+
+  let i = 0
+  do {
+    bytes /= 1024
+    i++
+  } while (bytes >= 1024 && i < units.length)
+
+  return `${bytes.toFixed(2)} ${units[i]}`
+}
+
 try {
   const archive = octopack(globList, packOptions)
 
   const publishParams = { name, version, extension, replace, stream: archive }
   publish(publishParams)
     .then(pkg => {
-      logger.info(`Published package '${pkg.id}${pkg.fileExtension}'`)
+      const fileSize = getFileSizeString(pkg.packageSizeBytes)
+      logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.fileExtension}' (${fileSize})`)
+
       return pkg
     })
     .catch(() => {

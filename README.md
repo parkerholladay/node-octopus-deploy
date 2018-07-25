@@ -60,7 +60,7 @@ octopus-deploy-pack-and-push \
     --apiKey=API-123 \
     --packageName=my-package \
     --packageVersion=1.0.1 \
-    --globs="./src/**::./node_modules/**::!**/*.spec.*" \
+    --globs='./src/**::./node_modules/**::!**/*.spec.*' \
     --base="./" \
     --replace \
     --zip
@@ -70,6 +70,8 @@ octopus-deploy-pack-and-push \
 `zip` is optional and creates a `.zip` file instead of `.tar.gz`
 
 `globs` is a `::` separated list of file globs describing the files to package
+
+_Note: If your globs have negations (`!`) you must wrap the `--globs` value in single quotes (`'`) rather than double quotes (`"`)_
 
 # Library usage
 
