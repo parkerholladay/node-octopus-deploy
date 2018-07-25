@@ -31,7 +31,12 @@ octopus-deploy-create-release \
     --packageVersion=1.0.1 \
     --releaseNotes="Test release notes"
 ```
+
 `packageVersion` and `releaseNotes` are optional
+
+_Note: If `packageVersion` is omitted, `version` will be used for all package versions when creating the release._
+
+The same package version will be used for all deployment steps. This requires that _ALL_ packages referenced by the deploy steps have the same version.
 
 ## Create release and deploy
 
@@ -48,9 +53,8 @@ octopus-deploy-create-release-and-deploy \
     --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
     --machineIds="Machines-123,Machines-456"
 ```
-`packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
 
-_Note: If `packageVersion` is omitted, `version` will be used for all package versions when creating the release._
+`packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
 
 ## Pack and push
 
@@ -65,6 +69,7 @@ octopus-deploy-pack-and-push \
     --replace \
     --zip
 ```
+
 `replace` is optional and will replace an existing package if one exists
 
 `zip` is optional and creates a `.zip` file instead of `.tar.gz`
@@ -74,8 +79,6 @@ octopus-deploy-pack-and-push \
 _Note: If your globs have negations (`!`) you must wrap the `--globs` value in single quotes (`'`) rather than double quotes (`"`)_
 
 # Library usage
-
-This module uses [bluebird](https://github.com/petkaantonov/bluebird) promises as much as possible.
 
 ## Setup client
 
@@ -88,60 +91,6 @@ const config = {
 }
 
 octopusApi.init(config)
-```
-
-## Commands
-
-The same package version will be used for all deployment steps. This requires that _ALL_ packages referenced by the deploy steps have the same version.
-
-### Simple create release
-
-```
-const releaseParams = {
-    projectSlugOrId: 'my-project-name',
-    version: '1.0.0-rc.3',
-    packageVersion: '1.0.0',
-    releaseNotes: 'Release notes for testing'
-}
-
-// Create release
-simpleCreateRelease(releaseParams)
-    .then((release) => {
-        console.log('Octopus release created:')
-        console.log(release)
-    }, (reason) => {
-        console.log('Octopus release creation failed!')
-        console.log(reason)
-    })
-```
-
-### Simple create release and deploy
-
-```
-const releaseParams = {
-    projectSlugOrId: 'my-project-name',
-    version: '1.0.0-rc.3',
-    packageVersion: '1.0.0',
-    releaseNotes: 'Release notes for testing'
-}
-
-const deployParams = {
-    environmentName: 'DEV-SERVER'
-    comments: 'Deploy releases-123 to DEVSERVER1'
-    variables: {
-        SourceDir: '\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3' // Form value example: source directory
-    }
-}
-
-// Create and deploy release
-simpleCreateReleaseAndDeploy(releaseParams, deployParams)
-    .then((deployment) => {
-        console.log('Octopus release created and deployed:')
-        console.log(deployment)
-    }, (reason) => {
-        console.log('Octopus release creation or deployment failed!')
-        console.log(reason)
-    })
 ```
 
 ## API
@@ -188,16 +137,22 @@ All implemented API endpoints can be found in the `./lib/api` directory. _Note: 
 - `release`
 - `variable`
 
-# Testing
-
-This module uses mocha tests. Simply run `npm test`, `npm run test:watch`, or `npm run test:cover`.
-
 # Contributing
 
 If there are other API functions you need, feel free to fork the project, add some tests along with the desired endpoint, and submit a pull request.
 I'll try to stay on top of things as much as possible.
 
 All commits will run the pre-commit hook which checks linting and runs all tests.
+
+## Testing
+
+100% test coverage is not an absolute (some code just can't be tested), but it is the goal
+
+Run `npm test` to run all tests for the project
+
+Run `npm run test:watch` to run tests in watch mode (ideal for development)
+
+Run `npm run test:cover` to run tests and report on test coverge
 
 # License
 
