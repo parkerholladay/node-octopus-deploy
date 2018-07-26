@@ -48,30 +48,24 @@ function getFileSizeString(bytes) {
   return `${bytes.toFixed(2)} ${units[i]}`
 }
 
-try {
-  const archive = octopack(globList, packOptions)
+octopack(globList, packOptions)
+  .then(contents => {
+    const publishParams = { name, version, extension, replace, contents }
 
-  const publishParams = { name, version, extension, replace, stream: archive }
-  publish(publishParams)
-    .then(pkg => {
-      const fileSize = getFileSizeString(pkg.packageSizeBytes)
-      logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.fileExtension}' (${fileSize})`)
+    return publish(publishParams)
+  })
+  .then(pkg => {
+    const fileSize = getFileSizeString(pkg.packageSizeBytes)
+    logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.fileExtension}' (${fileSize})`)
 
-      return pkg
-    })
-    .catch(() => {
-      logger.error(`Failed to publish '${packageNameAndVersion}'`)
+    return pkg
+  })
+  .catch(err => {
+    logger.error(`Failed to pack and publish '${packageNameAndVersion}'`, err.message)
 
-      /* eslint-disable no-process-exit */
-      process.exit(1)
-      /* eslint-enable no-process-exit */
-    })
-} catch (err) {
-  logger.error(`Failed to pack '${packageNameAndVersion}'`, err.message)
-
-  /* eslint-disable no-process-exit */
-  process.exit(1)
-  /* eslint-enable no-process-exit */
-}
+    /* eslint-disable no-process-exit */
+    process.exit(1)
+    /* eslint-enable no-process-exit */
+  })
 
 /* eslint-enable node/shebang */
