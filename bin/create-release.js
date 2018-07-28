@@ -12,25 +12,25 @@ const args = yargs
   .option('host', { describe: 'The base url of the octopus deploy server', demandOption: true })
   .option('apiKey', { describe: 'Api key used to connect to octopus deploy', demandOption: true })
   .option('projectSlugOrId', { describe: 'The id or slug of the octopus project', demandOption: true })
-  .option('version', { describe: 'The SemVer of the release to create', demandOption: true })
+  .option('releaseVersion', { describe: 'The SemVer of the release to create', demandOption: true })
   .option('releaseNotes', { describe: 'Notes to associate with the new release' })
   .option('packageVersion', { describe: 'The version of the packages to release' })
   .help()
   .alias('h', 'help')
-  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --version=2.0.0-rc-4 \\\n --packageVersion=1.0.1 \\\n --releaseNotes="Created release as post-build step"`)
+  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --releaseVersion=2.0.0-rc-4 \\\n --packageVersion=1.0.1 \\\n --releaseNotes="Created release as post-build step"`)
   .argv
 
-const { host, apiKey, projectSlugOrId, version, releaseNotes, packageVersion } = args
+const { host, apiKey, projectSlugOrId, releaseVersion, releaseNotes, packageVersion } = args
 
 octopus.init({ host, apiKey })
 
 logger.info(`Creating release for project '${projectSlugOrId}'...`)
 
-const params = { projectSlugOrId, version, releaseNotes, packageVersion }
+const params = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
 
 createRelease(params)
   .then(release => {
-    logger.info(`Finished creating release '${release.id}'. ${projectSlugOrId} ${version}`)
+    logger.info(`Finished creating release '${release.id}'. ${projectSlugOrId} ${releaseVersion}`)
     return release
   })
   .catch(err => {

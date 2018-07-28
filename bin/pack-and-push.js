@@ -21,7 +21,7 @@ const args = yargs
   .option('zip', { describe: 'Optional flag to use .zip format instead of .tar.gz', default: false })
   .help()
   .alias('h', 'help')
-  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --packageName=my-package \\\n --packageVersion=2.0.0-rc-4 \\\n --globs='./build/**::./node_modules/**::!**/*.spec.*' \\\n --base='./' \\\n --replace \\\n --zip`)
+  .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --packageName=my-package \\\n --packageVersion=2.0.0-rc-4 \\\n --globs='./build/**::./node_modules/**::!**/*.spec.*' \\\n --base=./ \\\n --replace \\\n --zip`)
   .argv
 
 const { host, apiKey, packageName: name, packageVersion: version, globs, base, replace, zip } = args
