@@ -36,7 +36,5 @@ createRelease(params)
   .catch(err => {
     logger.error('Failed to create release. Error:', err)
 
-    /* eslint-disable no-process-exit */
-    process.exit(1)
-    /* eslint-enable no-process-exit */
+    process.exitCode = 1
   })

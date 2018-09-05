@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable node/shebang */
 'use strict'
 
 const yargs = require('yargs')
@@ -29,24 +28,11 @@ const globList = globs.split('::')
 
 octopus.init({ host, apiKey })
 
-const packageNameAndVersion = `${name} - ${version}`
+const packageNameAndVersion = `${name} v${version}`
 logger.info(`Packing '${packageNameAndVersion}'...`)
 
 const extension = zip ? 'zip' : 'tar.gz'
 const packOptions = { base, zip }
-
-function getFileSizeString(bytes) {
-  const units = ['B', 'kB', 'MB', 'GB', 'TB']
-  if (bytes < 1024) return `${bytes} ${units[0]}`
-
-  let i = 0
-  do {
-    bytes /= 1024
-    i++
-  } while (bytes >= 1024 && i < units.length)
-
-  return `${bytes.toFixed(2)} ${units[i]}`
-}
 
 octopack(globList, packOptions)
   .then(contents => {
@@ -55,17 +41,11 @@ octopack(globList, packOptions)
     return publish(publishParams)
   })
   .then(pkg => {
-    const fileSize = getFileSizeString(pkg.packageSizeBytes)
-    logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.fileExtension}' (${fileSize})`)
-
+    logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.extension}' (${pkg.size})`)
     return pkg
   })
   .catch(err => {
     logger.error(`Failed to pack and publish '${packageNameAndVersion}'`, err.message)
 
-    /* eslint-disable no-process-exit */
-    process.exit(1)
-    /* eslint-enable no-process-exit */
+    process.exitCode = 1
   })
-
-/* eslint-enable node/shebang */

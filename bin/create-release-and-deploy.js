@@ -47,7 +47,5 @@ createReleaseAndDeploy(releaseParams, deployParams)
   .catch(err => {
     logger.error('Failed to create release and deploy. Error:', err.message)
 
-    /* eslint-disable no-process-exit */
-    process.exit(1)
-    /* eslint-enable no-process-exit */
+    process.exitCode = 1
   })

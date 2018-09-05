@@ -14,6 +14,7 @@ function create(overrides) {
       nugetFeedId: 'NugetFeed-123',
       nugetPackageId: 'NugetPackage-123',
       packageId: 'Package-123',
+      packageSizeBytes: 123,
       published: '2017-01-01T00:00:00+0000',
       releaseNotes: 'Release Notes Here - Testing Through REST API',
       summary: 'This is a summary about the package',
