@@ -26,6 +26,7 @@
       "multi-or-nest",
       "consistent"
     ],
+    "eol-last": "error",
     "generator-star-spacing": "off",
     "mocha/no-exclusive-tests": "error",
     "no-unused-expressions": "off",
