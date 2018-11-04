@@ -15,6 +15,14 @@
   "globals": {
     "expect": true
   },
+  "overrides": [
+    {
+      "files": "*.spec.js",
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ],
   "rules": {
     "array-bracket-spacing": "error",
     "arrow-parens": [
@@ -29,12 +37,11 @@
     "eol-last": "error",
     "generator-star-spacing": "off",
     "mocha/no-exclusive-tests": "error",
-    "no-unused-expressions": "off",
     "no-unused-vars": [
       2,
       {
         "vars": "all",
-        "args": "none",
+        "args": "after-used",
         "ignoreRestSiblings": true
       }
     ],
