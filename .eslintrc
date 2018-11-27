@@ -30,9 +30,8 @@
       "as-needed"
     ],
     "curly": [
-      "error",
-      "multi-or-nest",
-      "consistent"
+      2,
+      "all"
     ],
     "eol-last": "error",
     "generator-star-spacing": "off",
