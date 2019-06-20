@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
 [![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
 
-A set of node scripts to create releases within Octopus Deploy, and optionally deploy those releases.
+Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
 This package leverages the Octopus Deploy REST API:
 
 ```
@@ -12,7 +12,7 @@ https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki
 
 These scripts mimic the behavior of Octopus Deploy powershell CLI tools and enable calling octopus from a linux machine.
 
-The primary purpose is to be able to call the scripts via the command line, but you could also use the module as a library.
+The primary purpose is to be able to call the scripts for packaging, releasing, and deploying applications, via the command line, but you could also use the module as a library.
 
 ```
 npm install octopus-deploy
@@ -56,7 +56,7 @@ octopus-deploy-create-release-and-deploy \
 
 `packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
 
-## Pack and push
+## Create and push a package
 
 ```
 octopus-deploy-pack-and-push \
@@ -140,7 +140,6 @@ All implemented API endpoints can be found in the `./lib/api` directory. _Note: 
 # Contributing
 
 If there are other API functions you need, feel free to fork the project, add some tests along with the desired endpoint, and submit a pull request.
-I'll try to stay on top of things as much as possible.
 
 All commits will run the pre-commit hook which checks linting and runs all tests.
 
