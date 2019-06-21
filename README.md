@@ -4,11 +4,7 @@
 [![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
 
 Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
-This package leverages the Octopus Deploy REST API:
-
-```
-https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki
-```
+This package leverages the [Octopus Deploy REST API](https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki)
 
 These scripts mimic the behavior of Octopus Deploy powershell CLI tools and enable calling octopus from a linux machine.
 
@@ -80,48 +76,57 @@ _Note: If your globs have negations (`!`) you must wrap the `--globs` value in s
 
 # Library usage
 
-## Setup client
+## API
 
-```
+The wrapped api endpoints make use of a [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) borrowed from functional languages like Haskell. Each endpoint either returns a maybe with a `value` or not rather than throwing errors to be handled by the consumer.
+
+### Setup client
+
+```js
 const octopusApi = require('octopus-deploy')
 
 const config = {
-    host: 'https://octopus.acme.com',
-    apiKey: 'API-123' // This is used to authorize against the REST API
+  host: 'https://octopus.acme.com',
+  apiKey: 'API-123' // This is used to authorize against the REST API
 }
 
 octopusApi.init(config)
 ```
 
-## API
-
 ### Create release
 
 Selected packages for the deployment steps are specified more explicitly. For more information refer to [this Octopus support issue](http://help.octopusdeploy.com/discussions/problems/35372-create-release-a-version-must-be-specified-for-every-included-nuget-package).
 
-```
-const projectId = 'Projects-123'
-const version = '1.0.0-rc.3'
-const releaseNotes = 'Release notes for testing'
-const selectedPackages = [
+```js
+const releaseParams = {
+  projectId: 'Projects-123',
+  version: '1.0.0-rc.3',
+  releaseNotes: 'Release notes for testing',
+  selectedPackages: [
     {
-        StepName: 'My octopus process first step',
-        Version: '1.0.0.0'
+      StepName: 'My octopus process first step',
+      Version: '1.0.0.0'
     },
     {
-        StepName: 'My octopus process second step',
-        Version: '1.0.2-rc.1'
+      StepName: 'My octopus process second step',
+      Version: '1.0.2-rc.1'
     }
-]
+  ]
+}
 
-octopusApi.releases.create(projectId, version, releaseNotes, selectedPackages)
-    .then((release) => {
-        console.log('Octopus release created:')
-        console.log(release)
-    }, (reason) => {
-        console.log('Octopus release creation failed!')
-        console.log(reason)
-    })
+async function createRelease() {
+  const release = await octopusApi.releases.create(releaseParams)
+
+  if (!release.hasValue) {
+    console.error('Octopus release creation failed!')
+  }
+
+  console.log(`Octopus release '${release.value.id}' created.`)
+
+  return release.value
+}
+
+createRelease()
 ```
 
 ### Other
@@ -145,7 +150,7 @@ All commits will run the pre-commit hook which checks linting and runs all tests
 
 ## Testing
 
-100% test coverage is not an absolute (some code just can't be tested), but it is the goal
+100% test coverage is not an absolute (some code just can't be tested), but it is the aspirational goal
 
 Run `npm test` to run all tests for the project
 

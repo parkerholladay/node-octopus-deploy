@@ -2,23 +2,19 @@
 
 const { generateRelease } = require('./release')
 
-function generateProjectRelease(overrides) {
-  overrides = overrides || {}
+const generateProjectRelease = (overrides = {}) => {
   const { items } = overrides
-  delete overrides.items
 
-  return Object.assign({},
-    {
-      isStale: false,
-      items: items && items.length
-        ? items.map(generateRelease)
-        : [generateRelease()],
-      itemsPerPage: 30,
-      itemType: 'Release',
-      totalResults: 1
-    },
-    overrides
-  )
+  return {
+    isStale: false,
+    itemsPerPage: 30,
+    itemType: 'Release',
+    totalResults: (items && items.length) || 1,
+    ...overrides,
+    items: items && items.length
+      ? items.map(generateRelease)
+      : [generateRelease()]
+  }
 }
 
 module.exports = { generateProjectRelease }

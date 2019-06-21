@@ -3,7 +3,7 @@
 
 const yargs = require('yargs')
 
-const logger = require('../lib/utils/logger')
+const { logger } = require('../lib/utils/logger')
 const { octopack, publish } = require('../lib/octo-pack')
 const octopus = require('../lib/octopus-deploy')
 
@@ -22,29 +22,29 @@ const args = yargs
   .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --packageName=my-package \\\n --packageVersion=2.0.0-rc-4 \\\n --globs='./build/**::./node_modules/**::!**/*.spec.*' \\\n --base=./ \\\n --replace \\\n --zip`)
   .argv
 
-const { host, apiKey, packageName: name, packageVersion: version, globs, base, replace, zip } = args
-const globList = globs.split('::')
+const execute = async () => {
+  const { host, apiKey, packageName: name, packageVersion: version, globs, base, replace, zip } = args
+  const globList = globs.split('::')
 
-octopus.init({ host, apiKey })
+  octopus.init({ host, apiKey })
 
-const packageNameAndVersion = `${name} v${version}`
-logger.info(`Packing '${packageNameAndVersion}'...`)
+  const packageNameAndVersion = `${name} v${version}`
+  logger.info(`Packing '${packageNameAndVersion}'...`)
 
-const extension = zip ? 'zip' : 'tar.gz'
-const packOptions = { base, zip }
+  const extension = zip ? 'zip' : 'tar.gz'
+  const packOptions = { base, zip }
+  const publishParams = { name, version, extension, replace }
 
-octopack(globList, packOptions)
-  .then(contents => {
-    const publishParams = { name, version, extension, replace, contents }
+  try {
+    const contents = await octopack(globList, packOptions)
+    const pkg = await publish({ ...publishParams, contents })
 
-    return publish(publishParams)
-  })
-  .then(pkg => {
     logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.extension}' (${pkg.size})`)
-    return pkg
-  })
-  .catch(err => {
+  } catch (err) {
     logger.error(`Failed to pack and publish '${packageNameAndVersion}'`, err.message)
 
     process.exitCode = 1
-  })
+  }
+}
+
+execute()

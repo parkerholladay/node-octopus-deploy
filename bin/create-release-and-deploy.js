@@ -3,9 +3,9 @@
 
 const yargs = require('yargs')
 
-const logger = require('../lib/utils/logger')
+const { logger } = require('../lib/utils/logger')
 const octopus = require('../lib/octopus-deploy')
-const createReleaseAndDeploy = require('../lib/commands/simple-create-release-and-deploy')
+const { execute: createReleaseAndDeploy } = require('../lib/commands/simple-create-release-and-deploy')
 
 const args = yargs
   .usage('Usage:\n  $0 [options]')
@@ -24,28 +24,35 @@ const args = yargs
   .example(`$0 \\\n --host=https://octopus.acme.com \\\n --apiKey=API-123 \\\n --projectSlugOrId={my-project|projects-123} \\\n --releaseVersion=2.0.0-rc-4 \\\n --packageVersion=1.0.1 \\\n --releaseNotes="Created release as post-build step" \\\n --environmentName=DEV-SERVER \\\n --comments="Automated deploy to DEV-SERVER as post-build step" \\\n --variables="{\\"SourceDir\\": \\"\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3\\"}" \\\n --machineIds="Machines-123,Machines-456"`)
   .argv
 
-const { host, apiKey, projectSlugOrId, releaseVersion, releaseNotes, packageVersion, environmentName, comments } = args
-const variables = args.variables
-  ? JSON.parse(args.variables)
-  : {}
-const machineIds = args.machineIds
-  ? args.machineIds.split(',')
-  : null
+const execute = async () => {
+  const { host, apiKey, projectSlugOrId, releaseVersion, releaseNotes, packageVersion, environmentName, comments } = args
 
-octopus.init({ host, apiKey })
+  const variables = args.variables
+    ? JSON.parse(args.variables)
+    : {}
+  const machineIds = args.machineIds
+    ? args.machineIds.split(',')
+    : null
+  const releaseParams = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
+  const deployParams = { environmentName, comments, variables, machineIds }
 
-logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
+  octopus.init({ host, apiKey })
 
-const releaseParams = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
-const deployParams = { environmentName, comments, variables, machineIds }
+  logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
 
-createReleaseAndDeploy.execute(releaseParams, deployParams)
-  .then(deploy => {
-    logger.info(`Finished creating release '${deploy.releaseId}' and deployed '${deploy.id}'. ${projectSlugOrId} ${releaseVersion}`)
-    return deploy
-  })
-  .catch(err => {
+  try {
+    const deploy = await createReleaseAndDeploy(releaseParams, deployParams)
+    if (!deploy.hasValue) {
+      return
+    }
+
+    const { id: deploymentId, releaseId } = deploy.value
+    logger.info(`Finished creating release '${releaseId}' and deployed '${deploymentId}'. ${projectSlugOrId} ${releaseVersion}`)
+  } catch (err) {
     logger.error('Failed to create release and deploy. Error:', err.message)
 
     process.exitCode = 1
-  })
+  }
+}
+
+execute()
