@@ -6,4 +6,4 @@ afterEach(() => {
   sandbox.restore()
 })
 
-module.exports = sandbox
+module.exports = { sandbox }

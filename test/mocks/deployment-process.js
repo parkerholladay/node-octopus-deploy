@@ -1,6 +1,6 @@
 'use strict'
 
-function createAction(overrides) {
+function generateAction(overrides) {
   return Object.assign({},
     {
       id: 'Actions-123',
@@ -18,7 +18,7 @@ function createAction(overrides) {
   )
 }
 
-function createStep(overrides) {
+function generateStep(overrides) {
   overrides = overrides || {}
   const { actions } = overrides
   delete overrides.actions
@@ -27,8 +27,8 @@ function createStep(overrides) {
     {
       id: 'Steps-123',
       actions: actions && actions.length
-        ? actions.map(createAction)
-        : [createAction()],
+        ? actions.map(generateAction)
+        : [generateAction()],
       condition: '',
       name: 'Step 1',
       properties: {},
@@ -39,7 +39,7 @@ function createStep(overrides) {
   )
 }
 
-function create(overrides) {
+function generateDeploymentProcess(overrides) {
   overrides = overrides || {}
   const { steps } = overrides
   delete overrides.steps
@@ -53,12 +53,12 @@ function create(overrides) {
       links: {},
       projectId: 'Projects-123',
       steps: steps && steps.length
-        ? steps.map(createStep)
-        : [createStep()],
+        ? steps.map(generateStep)
+        : [generateStep()],
       version: '1.0.0'
     },
     overrides
   )
 }
 
-module.exports = create
+module.exports = { generateDeploymentProcess }

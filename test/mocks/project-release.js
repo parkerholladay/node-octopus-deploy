@@ -1,8 +1,8 @@
 'use strict'
 
-const createRelease = require('./release')
+const { generateRelease } = require('./release')
 
-function create(overrides) {
+function generateProjectRelease(overrides) {
   overrides = overrides || {}
   const { items } = overrides
   delete overrides.items
@@ -11,8 +11,8 @@ function create(overrides) {
     {
       isStale: false,
       items: items && items.length
-        ? items.map(createRelease)
-        : [createRelease()],
+        ? items.map(generateRelease)
+        : [generateRelease()],
       itemsPerPage: 30,
       itemType: 'Release',
       totalResults: 1
@@ -21,4 +21,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateProjectRelease }

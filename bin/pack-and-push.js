@@ -4,8 +4,7 @@
 const yargs = require('yargs')
 
 const logger = require('../lib/utils/logger')
-const octopack = require('../lib/octo-pack')
-const publish = require('../lib/octo-push')
+const { octopack, publish } = require('../lib/octo-pack')
 const octopus = require('../lib/octopus-deploy')
 
 const args = yargs

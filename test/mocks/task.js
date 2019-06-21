@@ -1,6 +1,6 @@
 'use strict'
 
-function create(overrides) {
+function generateTask(overrides) {
   return Object.assign({},
     {
       id: 'Task-123',
@@ -30,4 +30,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateTask }

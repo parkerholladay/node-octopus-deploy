@@ -119,14 +119,14 @@ octopusApi.releases.create(projectId, version, releaseNotes, selectedPackages)
         console.log('Octopus release created:')
         console.log(release)
     }, (reason) => {
-        console.log('Octopus release creation falied!')
+        console.log('Octopus release creation failed!')
         console.log(reason)
     })
 ```
 
 ### Other
 
-All implemented API endpoints can be found in the `./lib/api` directory. _Note: Not all Octopus Deploy endpionts are implemented._
+All implemented API endpoints can be found in the `./lib/api` directory. _Note: Not all Octopus Deploy endpoints are implemented._
 
 - `deployment`
 - `environment`
@@ -151,7 +151,7 @@ Run `npm test` to run all tests for the project
 
 Run `npm run test:watch` to run tests in watch mode (ideal for development)
 
-Run `npm run test:cover` to run tests and report on test coverge
+Run `npm run test:cover` to run tests and report on test coverage
 
 # License
 

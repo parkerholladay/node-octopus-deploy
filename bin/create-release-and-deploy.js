@@ -39,7 +39,7 @@ logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
 const releaseParams = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
 const deployParams = { environmentName, comments, variables, machineIds }
 
-createReleaseAndDeploy(releaseParams, deployParams)
+createReleaseAndDeploy.execute(releaseParams, deployParams)
   .then(deploy => {
     logger.info(`Finished creating release '${deploy.releaseId}' and deployed '${deploy.id}'. ${projectSlugOrId} ${releaseVersion}`)
     return deploy

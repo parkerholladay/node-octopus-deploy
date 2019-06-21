@@ -1,6 +1,6 @@
 'use strict'
 
-function createTentacleVersionDetails(overrides) {
+function generateTentacleVersionDetails(overrides) {
   return Object.assign({},
     {
       upgradeLocked: false,
@@ -12,7 +12,7 @@ function createTentacleVersionDetails(overrides) {
   )
 }
 
-function createEndpoint(overrides) {
+function generateEndpoint(overrides) {
   overrides = overrides || {}
   const { tentacleVersionDetails } = overrides
   delete overrides.tentacleVersionDetails
@@ -25,7 +25,7 @@ function createEndpoint(overrides) {
       lastModifiedOn: '2017-01-01T00:00:00+0000',
       links: {},
       proxyId: null,
-      tentacleVersionDetails: createTentacleVersionDetails(tentacleVersionDetails),
+      tentacleVersionDetails: generateTentacleVersionDetails(tentacleVersionDetails),
       thumbprint: '121DE7E5ABB0C47DF1A7A7104E40EB59BA63FA63',
       uri: 'https://machine.acme.com:10933/'
     },
@@ -33,7 +33,7 @@ function createEndpoint(overrides) {
   )
 }
 
-function create(overrides) {
+function generateMachine(overrides) {
   overrides = overrides || {}
   const { endpoint } = overrides
   delete overrides.endpoint
@@ -41,7 +41,7 @@ function create(overrides) {
   return Object.assign({},
     {
       id: 'Machines-123',
-      endpoint: createEndpoint(endpoint),
+      endpoint: generateEndpoint(endpoint),
       environmentIds: ['Environments-123'],
       hasLatestCalamari: true,
       healthStatus: 'Healthy',
@@ -62,4 +62,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateMachine }

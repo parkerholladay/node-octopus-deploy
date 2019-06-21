@@ -1,6 +1,6 @@
 'use strict'
 
-function create(overrides) {
+function generateDeployment(overrides) {
   return Object.assign({},
     {
       id: 'Deployments-123',
@@ -26,4 +26,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateDeployment }

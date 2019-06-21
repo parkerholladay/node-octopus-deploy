@@ -1,6 +1,6 @@
 'use strict'
 
-function create(overrides) {
+function generatePackage(overrides) {
   return Object.assign({},
     {
       id: 'Package-123',
@@ -25,4 +25,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generatePackage }

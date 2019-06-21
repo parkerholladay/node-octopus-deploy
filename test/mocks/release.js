@@ -1,6 +1,6 @@
 'use strict'
 
-function create(overrides) {
+function generateRelease(overrides) {
   return Object.assign({},
     {
       id: 'Releases-123',
@@ -21,4 +21,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateRelease }

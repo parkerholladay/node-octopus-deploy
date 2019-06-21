@@ -1,6 +1,6 @@
 'use strict'
 
-function create(overrides) {
+function generateEnvironment(overrides) {
   return Object.assign({},
     {
       id: 'Environments-123',
@@ -16,4 +16,4 @@ function create(overrides) {
   )
 }
 
-module.exports = create
+module.exports = { generateEnvironment }

@@ -1,6 +1,6 @@
 'use strict'
 
-function createScopeValues(overrides) {
+function generateScopeValues(overrides) {
   overrides = overrides || {}
 
   return {
@@ -41,7 +41,7 @@ function createScopeValues(overrides) {
   }
 }
 
-function createVariable(overrides) {
+function generateVariable(overrides) {
   return Object.assign({},
     {
       id: 'Variables-123',
@@ -59,7 +59,7 @@ function createVariable(overrides) {
   )
 }
 
-function create(overrides) {
+function generateVariableSet(overrides) {
   overrides = overrides || {}
   const { scopeValues, variables } = overrides
   delete overrides.scopeValues
@@ -72,14 +72,14 @@ function create(overrides) {
       lastModifiedOn: '2017-01-01T00:00:00+0000',
       links: {},
       ownerId: 'Projects-123',
-      scopeValues: createScopeValues(scopeValues),
+      scopeValues: generateScopeValues(scopeValues),
       variables: variables && variables
-        ? variables.map(createVariable)
-        : [createVariable()],
+        ? variables.map(generateVariable)
+        : [generateVariable()],
       version: 1
     },
     overrides
   )
 }
 
-module.exports = create
+module.exports = { generateVariableSet }

@@ -1,6 +1,6 @@
 'use strict'
 
-function createReleaseCreationStrategy(overrides) {
+function generateReleaseCreationStrategy(overrides) {
   return Object.assign({},
     {
       releaseCreationPackageStepId: ''
@@ -9,7 +9,7 @@ function createReleaseCreationStrategy(overrides) {
   )
 }
 
-function createVersioningStrategy(overrides) {
+function generateVersioningStrategy(overrides) {
   return Object.assign({},
     {
       donorPackageStepId: null,
@@ -19,7 +19,7 @@ function createVersioningStrategy(overrides) {
   )
 }
 
-function create(overrides) {
+function generateProject(overrides) {
   overrides = overrides || {}
   const { releaseCreationStrategy, versioningStrategy } = overrides
   delete overrides.releaseCreationStrategy
@@ -42,15 +42,15 @@ function create(overrides) {
       name: 'My Project Name',
       projectConnectivityPolicy: '',
       projectGroupId: 'ProjectGroups-123',
-      releaseCreationStrategy: createReleaseCreationStrategy(releaseCreationStrategy),
+      releaseCreationStrategy: generateReleaseCreationStrategy(releaseCreationStrategy),
       slug: 'my-project-name',
       templates: [],
       tenantDeploymentMode: '',
       variableSetId: 'VariableSet-Projects-123',
-      versioningStrategy: createVersioningStrategy(versioningStrategy)
+      versioningStrategy: generateVersioningStrategy(versioningStrategy)
     },
     overrides
   )
 }
 
-module.exports = create
+module.exports = { generateProject }

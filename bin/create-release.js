@@ -28,7 +28,7 @@ logger.info(`Creating release for project '${projectSlugOrId}'...`)
 
 const params = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
 
-createRelease(params)
+createRelease.execute(params)
   .then(release => {
     logger.info(`Finished creating release '${release.id}'. ${projectSlugOrId} ${releaseVersion}`)
     return release
