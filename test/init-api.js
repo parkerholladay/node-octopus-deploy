@@ -1,9 +1,11 @@
-const testConfig = require('./client-config')
-const octopus = require('../lib/octopus-deploy')
+'use strict'
+
+const { testConfig } = require('./api-config')
+const { clearApiConfig, setApiConfig } = require('../lib/utils')
 
 beforeEach(() => {
-  octopus.init(testConfig)
+  setApiConfig(testConfig)
 })
 afterEach(() => {
-  octopus.close()
+  clearApiConfig()
 })

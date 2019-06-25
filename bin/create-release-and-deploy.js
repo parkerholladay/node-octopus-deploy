@@ -4,8 +4,7 @@
 const yargs = require('yargs')
 
 const { createReleaseAndDeploy } = require('../lib/commands/create-release')
-const octopus = require('../lib/octopus-deploy')
-const { logger } = require('../lib/utils')
+const { logger, setApiConfig } = require('../lib/utils')
 
 const args = yargs
   .usage('Usage:\n  $0 [options]')
@@ -36,7 +35,7 @@ const execute = async () => {
   const releaseParams = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
   const deployParams = { environmentName, comments, variables, machineIds }
 
-  octopus.init({ host, apiKey })
+  setApiConfig({ host, apiKey })
 
   logger.info(`Creating release and deploying project '${projectSlugOrId}' to '${environmentName}'`)
 

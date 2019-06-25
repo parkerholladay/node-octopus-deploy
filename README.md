@@ -80,24 +80,35 @@ _Note: If your globs have negations (`!`) you must wrap the `--globs` value in s
 
 The wrapped api endpoints make use of a [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) borrowed from functional languages like Haskell. Each endpoint either returns a maybe with a `value` or not rather than throwing errors to be handled by the consumer.
 
-### Setup client
+### Usage
 
 ```js
-const octopusApi = require('octopus-deploy')
+const { initializeApi, octopusApi } = require('octopus-deploy')
 
 const config = {
   host: 'https://octopus.acme.com',
   apiKey: 'API-123' // This is used to authorize against the REST API
 }
 
-octopusApi.init(config)
+initializeApi(config)
+
+const projectId = 'Project-123'
+const project = octopusApi.projects.get(projectId)
+
+if (!project.hasValue) {
+  console.error(`Project '${projectId}' not found`)
+}
+
+console.log(`Found project '${project.value.name}' by id '${projectId}'`)
 ```
 
-### Create release
+### Create release example
 
 Selected packages for the deployment steps are specified more explicitly. For more information refer to [this Octopus support issue](http://help.octopusdeploy.com/discussions/problems/35372-create-release-a-version-must-be-specified-for-every-included-nuget-package).
 
 ```js
+const { octopusApi } = require('octopus-deploy')
+
 const releaseParams = {
   projectId: 'Projects-123',
   version: '1.0.0-rc.3',

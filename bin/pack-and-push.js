@@ -3,9 +3,8 @@
 
 const yargs = require('yargs')
 
-const { octopack, publish } = require('../lib/octo-pack')
-const octopus = require('../lib/octopus-deploy')
-const { logger } = require('../lib/utils')
+const { octopack, publish } = require('../lib/commands/octo-pack')
+const { logger, setApiConfig } = require('../lib/utils')
 
 const args = yargs
   .usage('Usage:\n  $0 [options]')
@@ -26,7 +25,7 @@ const execute = async () => {
   const { host, apiKey, packageName: name, packageVersion: version, globs, base, replace, zip } = args
   const globList = globs.split('::')
 
-  octopus.init({ host, apiKey })
+  setApiConfig({ host, apiKey })
 
   const packageNameAndVersion = `${name} v${version}`
   logger.info(`Packing '${packageNameAndVersion}'...`)

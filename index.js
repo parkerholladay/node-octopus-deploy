@@ -1,3 +1,9 @@
 'use strict'
 
-module.exports = require('./lib/octopus-deploy')
+const api = require('./lib/api')
+const { setApiConfig } = require('./lib/utils')
+
+module.exports = {
+  initializeApi: setApiConfig,
+  octopusApi: api
+}
