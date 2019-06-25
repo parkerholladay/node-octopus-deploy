@@ -3,9 +3,9 @@
 
 const yargs = require('yargs')
 
-const { logger } = require('../lib/utils/logger')
+const { createReleaseAndDeploy } = require('../lib/commands/create-release')
 const octopus = require('../lib/octopus-deploy')
-const { execute: createReleaseAndDeploy } = require('../lib/commands/simple-create-release-and-deploy')
+const { logger } = require('../lib/utils')
 
 const args = yargs
   .usage('Usage:\n  $0 [options]')
@@ -38,16 +38,10 @@ const execute = async () => {
 
   octopus.init({ host, apiKey })
 
-  logger.info(`Creating release and deploying project '${projectSlugOrId}'...`)
+  logger.info(`Creating release and deploying project '${projectSlugOrId}' to '${environmentName}'`)
 
   try {
-    const deploy = await createReleaseAndDeploy(releaseParams, deployParams)
-    if (!deploy.hasValue) {
-      return
-    }
-
-    const { id: deploymentId, releaseId } = deploy.value
-    logger.info(`Finished creating release '${releaseId}' and deployed '${deploymentId}'. ${projectSlugOrId} ${releaseVersion}`)
+    await createReleaseAndDeploy(releaseParams, deployParams)
   } catch (err) {
     logger.error('Failed to create release and deploy. Error:', err.message)
 
