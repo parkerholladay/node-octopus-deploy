@@ -22,23 +22,32 @@ const args = yargs
   .argv
 
 const execute = async () => {
-  const { host, apiKey, packageName: name, packageVersion: version, globs, base, replace, zip } = args
+  const { host, apiKey, packageName, packageVersion, globs, base, replace, zip } = args
   const globList = globs.split('::')
 
   setApiConfig({ host, apiKey })
 
-  const packageNameAndVersion = `${name} v${version}`
+  const packageNameAndVersion = `${packageName} v${packageVersion}`
   logger.info(`Packing '${packageNameAndVersion}'...`)
 
   const extension = zip ? 'zip' : 'tar.gz'
   const packOptions = { base, zip }
-  const publishParams = { name, version, extension, replace }
+  const publishParams = { name: packageName, version: packageVersion, extension, replace }
 
   try {
     const contents = await octopack(globList, packOptions)
-    const pkg = await publish({ ...publishParams, contents })
+    if (!contents.hasValue) {
+      return
+    }
 
-    logger.info(`Published package '${pkg.title}.${pkg.version}${pkg.extension}' (${pkg.size})`)
+    const pkg = await publish({ ...publishParams, contents: contents.value })
+    if (!pkg.hasValue) {
+      return
+    }
+
+    const { title, version, extension, size } = pkg.value
+
+    logger.info(`Published package '${title}.${version}${extension}' (${size})`)
   } catch (err) {
     logger.error(`Failed to pack and publish '${packageNameAndVersion}'`, err.message)
 
