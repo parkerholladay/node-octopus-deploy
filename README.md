@@ -23,14 +23,14 @@ octopus-deploy-create-release \
     --host=https://octopus.acme.com \
     --apiKey=API-123 \
     --projectSlugOrId=my-project \
-    --version=2.0.0-rc-4 \
+    --releaseVersion=2.0.0-rc-4 \
     --packageVersion=1.0.1 \
     --releaseNotes="Test release notes"
 ```
 
 `packageVersion` and `releaseNotes` are optional
 
-_Note: If `packageVersion` is omitted, `version` will be used for all package versions when creating the release._
+_Note: If `packageVersion` is omitted, `releaseVersion` will be used for all package versions when creating the release._
 
 The same package version will be used for all deployment steps. This requires that _ALL_ packages referenced by the deploy steps have the same version.
 
@@ -41,7 +41,7 @@ octopus-deploy-create-release-and-deploy \
     --host=https://octopus.acme.com \
     --apiKey=API-123 \
     --projectSlugOrId=Projects-123 \
-    --version=2.0.0-rc-4 \
+    --releaseVersion=2.0.0-rc-4 \
     --packageVersion=1.0.1 \
     --releaseNotes="Test release notes" \
     --environmentName=DEV-SERVER \
@@ -115,12 +115,12 @@ const releaseParams = {
   releaseNotes: 'Release notes for testing',
   selectedPackages: [
     {
-      StepName: 'My octopus process first step',
-      Version: '1.0.0.0'
+      stepName: 'My octopus process first step',
+      version: '1.0.0.0'
     },
     {
-      StepName: 'My octopus process second step',
-      Version: '1.0.2-rc.1'
+      stepName: 'My octopus process second step',
+      version: '1.0.2-rc.1'
     }
   ]
 }
@@ -144,14 +144,14 @@ createRelease()
 
 All implemented API endpoints can be found in the `./lib/api` directory. _Note: Not all Octopus Deploy endpoints are implemented._
 
-- `deployment`
-- `environment`
-- `machine`
-- `package`
-- `process`
-- `project`
-- `release`
-- `variable`
+- `deployments`
+- `environments`
+- `machines`
+- `packages`
+- `processes`
+- `projects`
+- `releases`
+- `variables`
 
 # Contributing
 
