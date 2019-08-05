@@ -12,9 +12,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "bin": {
-    "octopus-deploy-create-release": "./bin/create-release.js",
-    "octopus-deploy-create-release-and-deploy": "./bin/create-release-and-deploy.js",
-    "octopus-deploy-pack-and-push": "./bin/pack-and-push.js"
+    "octopus-deploy": "./bin/octopus-deploy.js"
   },
   "engines": {
     "node": ">=10.13"

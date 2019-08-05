@@ -19,13 +19,13 @@ npm install octopus-deploy
 ## Create release
 
 ```
-octopus-deploy-create-release \
-    --host=https://octopus.acme.com \
-    --apiKey=API-123 \
-    --projectSlugOrId=my-project \
-    --releaseVersion=2.0.0-rc-4 \
-    --packageVersion=1.0.1 \
-    --releaseNotes="Test release notes"
+octopus-deploy release create \
+    --host https://octopus.acme.com \
+    --apiKey API-123 \
+    --projectSlugOrId my-project \
+    --releaseVersion 2.0.0-rc-4 \
+    --packageVersion 1.0.1 \
+    --releaseNotes "Test release notes"
 ```
 
 `packageVersion` and `releaseNotes` are optional
@@ -37,17 +37,17 @@ The same package version will be used for all deployment steps. This requires th
 ## Create release and deploy
 
 ```
-octopus-deploy-create-release-and-deploy \
-    --host=https://octopus.acme.com \
-    --apiKey=API-123 \
-    --projectSlugOrId=Projects-123 \
-    --releaseVersion=2.0.0-rc-4 \
-    --packageVersion=1.0.1 \
-    --releaseNotes="Test release notes" \
-    --environmentName=DEV-SERVER \
-    --comments="Automated Deploy to DEV-SERVER as post-build step" \
-    --variables="{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
-    --machineIds="Machines-123,Machines-456"
+octopus-deploy release deploy \
+    --host https://octopus.acme.com \
+    --apiKey API-123 \
+    --projectSlugOrId Projects-123 \
+    --releaseVersion 2.0.0-rc-4 \
+    --packageVersion 1.0.1 \
+    --releaseNotes "Test release notes" \
+    --environmentName DEV-SERVER \
+    --comments "Automated Deploy to DEV-SERVER as post-build step" \
+    --variables "{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
+    --machineIds Machines-123 Machines-456
 ```
 
 `packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
@@ -55,24 +55,22 @@ octopus-deploy-create-release-and-deploy \
 ## Create and push a package
 
 ```
-octopus-deploy-pack-and-push \
-    --host=https://octopus.acme.com \
-    --apiKey=API-123 \
-    --packageName=my-package \
-    --packageVersion=1.0.1 \
-    --globs='./src/**::./node_modules/**::!**/*.spec.*' \
-    --base="./" \
+octopus-deploy octopack \
+    --host https://octopus.acme.com \
+    --apiKey API-123 \
+    --packageName my-package \
+    --packageVersion 1.0.1 \
+    --globs './src/**' './node_modules/**' '!**/*.spec.*' \
+    --base ./ \
     --replace \
     --zip
 ```
 
-`replace` is optional and will replace an existing package if one exists
+`replace` is optional and will replace a package if it already exists _Note: Requires specific permission in Octopus Deploy_
 
 `zip` is optional and creates a `.zip` file instead of `.tar.gz`
 
-`globs` is a `::` separated list of file globs describing the files to package
-
-_Note: If your globs have negations (`!`) you must wrap the `--globs` value in single quotes (`'`) rather than double quotes (`"`)_
+`globs` is a list of file globs describing the files to be packaged _Note: Each glob value in the list must be wrapped in single quotes (`'`)_
 
 # Library usage
 
