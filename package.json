@@ -44,7 +44,7 @@
     "json-casing": "1.2.1",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
-    "yargs": "14.0.0"
+    "yargs": "15.0.2"
   },
   "devDependencies": {
     "chai": "4.2.0",
