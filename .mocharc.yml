@@ -1,0 +1,7 @@
+ignore: node_modules/**
+reporter: nyan
+require: test/setup
+spec: lib/**/__specs__/*.spec.js
+watchFiles:
+  - lib/**/*.js
+  - test/**/*.js

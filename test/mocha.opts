@@ -1,4 +1,0 @@
---require test/setup
---reporter nyan
-
-{,!(node_modules)/**/}*.spec.js

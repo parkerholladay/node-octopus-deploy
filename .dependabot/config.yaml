@@ -8,3 +8,7 @@ update_configs:
       - parkerholladay
     default_assignees:
       - parkerholladay
+    automerged_updates:
+      - match:
+          dependency_type: development
+          update_type: all
