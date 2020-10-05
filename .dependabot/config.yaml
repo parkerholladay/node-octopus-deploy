@@ -3,7 +3,7 @@ version: 1
 update_configs:
   - package_manager: javascript
     directory: /
-    update_schedule: monthly
+    update_schedule: daily
     default_reviewers:
       - parkerholladay
     default_assignees:
