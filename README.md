@@ -3,18 +3,37 @@
 [![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
 [![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
 
-Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
-This package leverages the [Octopus Deploy REST API](https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki)
+> Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
 
-These scripts mimic the behavior of Octopus Deploy powershell CLI tools and enable calling octopus from a linux machine.
+These scripts replicate some of the functionality of the Octopus Deploy powershell CLI tool and enable calling octopus from non-Windows machines.
 
-The primary purpose is to be able to call the scripts for packaging, releasing, and deploying applications, via the command line, but you could also use the module as a library.
+This package leverages the [Octopus Deploy REST API](https://github.com/OctopusDeploy/OctopusDeploy-Api/wiki). The primary purpose is to be able to call the scripts for packaging, releasing, and deploying applications, via the command line, but you could also use the module as a library.
 
 ```
-npm install octopus-deploy
+npm install --save-dev octopus-deploy
 ```
 
 # CLI usage
+
+## Create and push a package
+
+```
+octopus-deploy octopack \
+    --host https://octopus.acme.com \
+    --apiKey API-123 \
+    --packageName my-package \
+    --packageVersion 1.0.1 \
+    --globs './src/**' './node_modules/**' '!**/*.spec.*' \
+    --base ./ \
+    --replace \
+    --zip
+```
+
+`replace` is optional and will replace a package if it already exists _Note: Requires specific permission in Octopus Deploy_
+
+`zip` is optional and creates a `.zip` file instead of `.tar.gz`
+
+`globs` is a list of file globs describing the files to be packaged _Note: Each glob value in the list must be wrapped in single quotes (`'`)_
 
 ## Create release
 
@@ -51,26 +70,6 @@ octopus-deploy release deploy \
 ```
 
 `packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
-
-## Create and push a package
-
-```
-octopus-deploy octopack \
-    --host https://octopus.acme.com \
-    --apiKey API-123 \
-    --packageName my-package \
-    --packageVersion 1.0.1 \
-    --globs './src/**' './node_modules/**' '!**/*.spec.*' \
-    --base ./ \
-    --replace \
-    --zip
-```
-
-`replace` is optional and will replace a package if it already exists _Note: Requires specific permission in Octopus Deploy_
-
-`zip` is optional and creates a `.zip` file instead of `.tar.gz`
-
-`globs` is a list of file globs describing the files to be packaged _Note: Each glob value in the list must be wrapped in single quotes (`'`)_
 
 # Library usage
 
