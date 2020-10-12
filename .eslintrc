@@ -36,6 +36,7 @@
     "eol-last": "error",
     "generator-star-spacing": "off",
     "mocha/no-exclusive-tests": "error",
+    "no-console": "error",
     "no-unused-vars": [
       2,
       {

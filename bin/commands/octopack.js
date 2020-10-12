@@ -20,7 +20,6 @@ const builder = yargs =>
     .version(false)
 
 const handler = async args => {
-  console.log('args:', args)
   const { host, apiKey, packageName, packageVersion, globs, base, replace, zip } = args
 
   setApiConfig({ host, apiKey })
