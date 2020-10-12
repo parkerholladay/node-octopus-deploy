@@ -1,10 +1,16 @@
+coverage
+.dependabot
 .editorconfig
 .eslintrc
 .gitignore
+.huskyrc
+.mocharc.yml
 node_modules
 .npmignore
 .npmrc
 .nvmrc
+.nycrc
+.nyc_output
 __specs__
 .travis.yml
 test
