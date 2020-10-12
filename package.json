@@ -1,6 +1,6 @@
 {
   "name": "octopus-deploy",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Node scripts to package up applications, create releases, and deploy with Octopus Deploy. This package leverages the Octopus Deploy REST API in order to deploy from Windows and non-Windows machines.",
   "main": "index.js",
   "scripts": {
