@@ -65,7 +65,7 @@ octopus-deploy release deploy \
     --releaseNotes "Test release notes" \
     --environmentName Staging \
     --comments "Automated Deploy to Staging as post-build step" \
-    --variables "{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
+    --variables "{ \"host\": \"https://api.acme.com\", \"key\": \"its-a-secret-to-everybody\" }" \
     --machineIds Machines-123 Machines-456
 ```
 
@@ -74,14 +74,14 @@ octopus-deploy release deploy \
 ### Promote/deploy existing release
 
 ```bash
-octopus-deploy release deploy \
+octopus-deploy release promote \
     --host https://octopus.acme.com \
     --apiKey API-123 \
     --projectSlugOrId Projects-123 \
     --releaseVersion 2.2.1 \
     --environmentName Production \
     --comments "Automated Deploy to Production as post-build step" \
-    --variables "{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
+    --variables "{ \"host\": \"https://api.acme.com\", \"key\": \"its-a-secret-to-everybody\" }" \
     --machineIds Machines-123 Machines-456
 ```
 
