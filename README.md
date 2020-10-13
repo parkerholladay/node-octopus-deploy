@@ -13,11 +13,11 @@ This package leverages the [Octopus Deploy REST API](https://github.com/OctopusD
 npm install --save-dev octopus-deploy
 ```
 
-# CLI usage
+## CLI usage
 
-## Create and push a package
+### Create and push a package
 
-```
+```bash
 octopus-deploy octopack \
     --host https://octopus.acme.com \
     --apiKey API-123 \
@@ -35,9 +35,9 @@ octopus-deploy octopack \
 
 `globs` is a list of file globs describing the files to be packaged _Note: Each glob value in the list must be wrapped in single quotes (`'`)_
 
-## Create release
+### Create release
 
-```
+```bash
 octopus-deploy release create \
     --host https://octopus.acme.com \
     --apiKey API-123 \
@@ -53,9 +53,9 @@ _Note: If `packageVersion` is omitted, `releaseVersion` will be used for all pac
 
 The same package version will be used for all deployment steps. This requires that _ALL_ packages referenced by the deploy steps have the same version.
 
-## Create release and deploy
+### Create release and deploy
 
-```
+```bash
 octopus-deploy release deploy \
     --host https://octopus.acme.com \
     --apiKey API-123 \
@@ -63,21 +63,38 @@ octopus-deploy release deploy \
     --releaseVersion 2.0.0-rc-4 \
     --packageVersion 1.0.1 \
     --releaseNotes "Test release notes" \
-    --environmentName DEV-SERVER \
-    --comments "Automated Deploy to DEV-SERVER as post-build step" \
+    --environmentName Staging \
+    --comments "Automated Deploy to Staging as post-build step" \
     --variables "{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
     --machineIds Machines-123 Machines-456
 ```
 
 `packageVersion`, `releaseNotes`, `comments`, `variables`, and `machineIds` are optional
 
-# Library usage
+### Promote/deploy existing release
 
-## API
+```bash
+octopus-deploy release deploy \
+    --host https://octopus.acme.com \
+    --apiKey API-123 \
+    --projectSlugOrId Projects-123 \
+    --releaseVersion 2.2.1 \
+    --environmentName Production \
+    --comments "Automated Deploy to Production as post-build step" \
+    --variables "{\"SourceDir\": \"\\\\\\\\SOURCESERVER\\\\MyProject\\\\1.0.0-rc-3 \"}" \
+    --machineIds Machines-123 Machines-456
+```
+
+`comments`, `variables`, and `machineIds` are optional
+
+
+## Library usage
+
+### API
 
 The wrapped api endpoints make use of a [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) borrowed from functional languages like Haskell. Each endpoint either returns a maybe with a `value` or not rather than throwing errors to be handled by the consumer.
 
-### Usage
+#### Usage
 
 ```js
 const { initializeApi, octopusApi } = require('octopus-deploy')
@@ -99,7 +116,7 @@ if (!project.hasValue) {
 console.log(`Found project '${project.value.name}' by id '${projectId}'`)
 ```
 
-### Create release example
+#### Create release example
 
 Selected packages for the deployment steps are specified more explicitly. For more information refer to [this Octopus support issue](http://help.octopusdeploy.com/discussions/problems/35372-create-release-a-version-must-be-specified-for-every-included-nuget-package).
 
@@ -137,7 +154,7 @@ async function createRelease() {
 createRelease()
 ```
 
-### Other
+#### Other
 
 All implemented API endpoints can be found in the `./lib/api` directory. _Note: Not all Octopus Deploy endpoints are implemented._
 
@@ -150,22 +167,24 @@ All implemented API endpoints can be found in the `./lib/api` directory. _Note: 
 - `releases`
 - `variables`
 
-# Contributing
+## Contributing
 
 If there are other API functions you need, feel free to fork the project, add some tests along with the desired endpoint, and submit a pull request.
 
 All commits will run the pre-commit hook which checks linting and runs all tests.
 
-## Testing
+### Testing
 
 100% test coverage is not an absolute (some code just can't be tested), but it is the aspirational goal
 
-Run `npm test` to run all tests for the project
+```bash
+npm test  # Runs all tests for the project
 
-Run `npm run test:watch` to run tests in watch mode (ideal for development)
+npm run test:watch  # Runs tests in watch mode (ideal for development)
 
-Run `npm run test:cover` to run tests and report on test coverage
+npm run test:cover  # Runs tests and report on test coverage
+```
 
-# License
+## License
 
 MIT
