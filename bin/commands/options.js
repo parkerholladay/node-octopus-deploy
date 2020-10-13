@@ -55,6 +55,38 @@ const deployOptions = {
   }
 }
 
+const promoteOptions = {
+  ...baseOptions,
+  projectSlugOrId: {
+    alias: 'p',
+    describe: 'The id or slug of the octopus project',
+    demandOption: true
+  },
+  releaseVersion: {
+    alias: 'v',
+    describe: 'The SemVer of the release to create',
+    demandOption: true
+  },
+  environmentName: {
+    alias: 'e',
+    describe: 'The name of the environment to deploy to',
+    demandOption: true
+  },
+  comments: {
+    alias: 'c',
+    describe: 'Deploy comments'
+  },
+  variables: {
+    alias: 'l',
+    describe: 'Deploy variables'
+  },
+  machineIds: {
+    alias: 'm',
+    describe: 'A list of machine ids to target',
+    type: 'array'
+  }
+}
+
 const octopackOptions = {
   ...baseOptions,
   packageName: {
@@ -93,5 +125,6 @@ module.exports = {
   baseOptions,
   deployOptions,
   octopackOptions,
+  promoteOptions,
   releaseOptions
 }
