@@ -8,14 +8,14 @@ const builder = yargs =>
   yargs
     .usage('Usage:\n  $0 release promote [options]')
     .options(promoteOptions)
-    .example(`$0 release deploy \\
+    .example(`$0 release promote \\
       --host https://octopus.acme.com \\
       --apiKey API-123 \\
       --projectSlugOrId {my-project|Projects-123} \\
       --releaseVersion 1.2.1 \\
       --environmentName Production \\
       --comments "Automated deploy to Production as post-build step" \\
-      --variables "{\\"SourceDir\\":\\"\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3\\"}" \\
+      --variables "{ \\"host\\": \\"https://api.acme.com\\", \\"key\\": \\"its-a-secret-to-everybody\\" }" \\
       --machineIds Machines-123 Machines-456`)
 
 const handler = async args => {
@@ -35,7 +35,7 @@ const handler = async args => {
   try {
     await promoteRelease(releaseParams, deployParams)
   } catch (err) {
-    logger.error('Failed to create release and deploy. Error:', err.message)
+    logger.error('Failed to deploy release. Error:', err.message)
 
     process.exitCode = 1
   }

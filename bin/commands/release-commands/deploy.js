@@ -15,9 +15,9 @@ const builder = yargs =>
       --releaseVersion 2.0.0-rc-4 \\
       --packageVersion 1.0.1 \\
       --releaseNotes "Created release as post-build step" \\
-      --environmentName DEV-SERVER \\
-      --comments "Automated deploy to DEV-SERVER as post-build step" \\
-      --variables "{\\"SourceDir\\":\\"\\\\SOURCESERVER\\MyProject\\1.0.0-rc-3\\"}" \\
+      --environmentName Staging \\
+      --comments "Automated deploy to Staging as post-build step" \\
+      --variables "{ \\"host\\": \\"https://api.acme.com\\", \\"key\\": \\"its-a-secret-to-everybody\\" }" \\
       --machineIds Machines-123 Machines-456`)
 
 const handler = async args => {
