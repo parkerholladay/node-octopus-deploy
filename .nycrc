@@ -1,10 +1,18 @@
 {
   "all": true,
+  "branches": 95,
+  "check-coverage": true,
   "exclude": [
     "**/__specs__"
   ],
+  "functions": 100,
   "include": [
     "lib/**/*.js"
   ],
-  "reporter": ["text", "html"]
+  "lines": 95,
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "statements": 95
 }

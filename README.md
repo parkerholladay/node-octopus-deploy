@@ -1,7 +1,9 @@
 # octopus-deploy
 
-[![Build status](https://github.com/parkerholladay/node-octopus-deploy/workflows/build/badge.svg)](https://github.com/parkerholladay/node-octopus-deploy/actions)
-[![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
+[![build status](https://img.shields.io/github/workflow/status/parkerholladay/node-octopus-deploy/Build?logo=github&style=for-the-badge)](https://github.com/parkerholladay/node-octopus-deploy/actions)
+[![npm](https://img.shields.io/npm/v/octopus-deploy?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/octopus-deploy)
+![license](https://img.shields.io/npm/l/octopus-deploy?style=for-the-badge)
+![test coverage](https://img.shields.io/nycrc/parkerholladay/node-octopus-deploy?label=coverage&preferredThreshold=functions&style=for-the-badge)
 
 > Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
 

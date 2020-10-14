@@ -7,7 +7,7 @@
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "test": "mocha",
-    "test:ci": "npm run test -- --reporter tap",
+    "test:ci": "nyc --reporter text npm run test -- --reporter tap",
     "test:cover": "nyc npm run test",
     "test:watch": "npm run test -- --watch"
   },
