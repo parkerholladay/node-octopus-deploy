@@ -1,6 +1,6 @@
 # octopus-deploy
 
-[![Build Status](https://travis-ci.org/parkerholladay/node-octopus-deploy.svg?branch=master)](https://travis-ci.org/parkerholladay/node-octopus-deploy)
+[![Build status](https://github.com/parkerholladay/node-octopus-deploy/workflows/build/badge.svg)](https://github.com/parkerholladay/node-octopus-deploy/actions)
 [![NPM version](https://badge.fury.io/js/octopus-deploy.png)](http://badge.fury.io/js/octopus-deploy)
 
 > Node scripts to package up applications, create releases, and deploy with Octopus Deploy.

@@ -58,5 +58,10 @@
     "nyc": "15.1.0",
     "sinon": "9.2.0",
     "sinon-chai": "3.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test"
+    }
   }
 }
