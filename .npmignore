@@ -2,6 +2,7 @@ coverage
 .dependabot
 .editorconfig
 .eslintrc
+.github
 .gitignore
 .huskyrc
 .mocharc.yml
