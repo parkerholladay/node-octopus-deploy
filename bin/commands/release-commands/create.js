@@ -3,6 +3,7 @@
 const { createRelease } = require('../../../lib/commands/create-release')
 const { releaseOptions } = require('../options')
 const { logger, setApiConfig } = require('../../../lib/utils')
+const { setSpace } = require('../../../lib/commands/set-space')
 
 const builder = yargs =>
   yargs
@@ -17,10 +18,11 @@ const builder = yargs =>
       --releaseNotes "Created release as post-build step"`)
 
 const handler = async args => {
-  const { host, apiKey, projectSlugOrId, releaseVersion, releaseNotes, packageVersion } = args
+  const { host, apiKey, space, projectSlugOrId, releaseVersion, releaseNotes, packageVersion } = args
   const params = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
 
   setApiConfig({ host, apiKey })
+  setSpace.execute(space)
 
   logger.info(`Creating release for project '${projectSlugOrId}'`)
 

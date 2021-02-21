@@ -8,6 +8,11 @@ const baseOptions = {
     alias: 'k',
     describe: 'Api key used to connect to octopus deploy',
     demandOption: true
+  },
+  space: {
+    alias: 'S',
+    describe: 'the name of the space',
+    demandOption: false
   }
 }
 
