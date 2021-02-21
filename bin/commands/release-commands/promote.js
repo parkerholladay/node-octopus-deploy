@@ -3,6 +3,7 @@
 const { promoteRelease } = require('../../../lib/commands/create-release')
 const { promoteOptions } = require('../options')
 const { logger, setApiConfig } = require('../../../lib/utils')
+const ensureSpaceIsSet = require('../../../lib/commands/ensure-space-set')
 
 const builder = yargs =>
   yargs
@@ -19,7 +20,7 @@ const builder = yargs =>
       --machineIds Machines-123 Machines-456`)
 
 const handler = async args => {
-  const { host, apiKey, projectSlugOrId, releaseVersion, environmentName, comments, machineIds } = args
+  const { host, space, apiKey, projectSlugOrId, releaseVersion, environmentName, comments, machineIds } = args
 
   const variables = args.variables
     ? JSON.parse(args.variables)
@@ -29,6 +30,7 @@ const handler = async args => {
   const deployParams = { environmentName, comments, variables, machineIds }
 
   setApiConfig({ host, apiKey })
+  await ensureSpaceIsSet.execute(space)
 
   logger.info(`Promoting release version '${releaseVersion}' for project '${projectSlugOrId}' to '${environmentName}'`)
 

@@ -1,6 +1,7 @@
 'use strict'
 
 const { octopack, publish } = require('../../lib/commands/octo-pack')
+const ensureSpaceIsSet = require('../../lib/commands/ensure-space-set')
 const { octopackOptions } = require('./options')
 const { logger, setApiConfig } = require('../../lib/utils')
 
@@ -20,9 +21,10 @@ const builder = yargs =>
     .version(false)
 
 const handler = async args => {
-  const { host, apiKey, packageName, packageVersion, globs, base, replace, zip } = args
+  const { host, apiKey, space, packageName, packageVersion, globs, base, replace, zip } = args
 
   setApiConfig({ host, apiKey })
+  await ensureSpaceIsSet.execute(space)
 
   const packageNameAndVersion = `${packageName} v${packageVersion}`
   logger.info(`Packing '${packageNameAndVersion}'...`)

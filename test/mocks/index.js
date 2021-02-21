@@ -9,5 +9,6 @@ module.exports = {
   ...require('./project-release'),
   ...require('./release'),
   ...require('./task'),
-  ...require('./variable-set')
+  ...require('./variable-set'),
+  ...require('./space')
 }
