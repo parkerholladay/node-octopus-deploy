@@ -3,7 +3,7 @@
 const { createReleaseAndDeploy } = require('../../../lib/commands/create-release')
 const { deployOptions } = require('../options')
 const { logger, setApiConfig } = require('../../../lib/utils')
-const setSpace = require('../../../lib/commands/set-space')
+const ensureSpaceSet = require('../../../lib/commands/ensure-space-set')
 
 const builder = yargs =>
   yargs
@@ -32,7 +32,7 @@ const handler = async args => {
   const deployParams = { environmentName, comments, variables, machineIds }
 
   setApiConfig({ host, apiKey })
-  setSpace.execute(space)
+  ensureSpaceSet.execute(space)
 
   logger.info(`Creating release and deploying project '${projectSlugOrId}' to '${environmentName}'`)
 
