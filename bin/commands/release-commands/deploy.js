@@ -32,7 +32,7 @@ const handler = async args => {
   const deployParams = { environmentName, comments, variables, machineIds }
 
   setApiConfig({ host, apiKey })
-  ensureSpaceSet.execute(space)
+  await ensureSpaceSet.execute(space)
 
   logger.info(`Creating release and deploying project '${projectSlugOrId}' to '${environmentName}'`)
 

@@ -22,7 +22,7 @@ const handler = async args => {
   const params = { projectSlugOrId, version: releaseVersion, releaseNotes, packageVersion }
 
   setApiConfig({ host, apiKey })
-  ensureSpaceIsSet.execute(space)
+  await ensureSpaceIsSet.execute(space)
 
   logger.info(`Creating release for project '${projectSlugOrId}'`)
 

@@ -30,7 +30,7 @@ const handler = async args => {
   const deployParams = { environmentName, comments, variables, machineIds }
 
   setApiConfig({ host, apiKey })
-  ensureSpaceIsSet.execute(space)
+  await ensureSpaceIsSet.execute(space)
 
   logger.info(`Promoting release version '${releaseVersion}' for project '${projectSlugOrId}' to '${environmentName}'`)
 

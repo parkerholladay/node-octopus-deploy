@@ -24,7 +24,7 @@ const handler = async args => {
   const { host, apiKey, space, packageName, packageVersion, globs, base, replace, zip } = args
 
   setApiConfig({ host, apiKey })
-  ensureSpaceIsSet.execute(space)
+  await ensureSpaceIsSet.execute(space)
 
   const packageNameAndVersion = `${packageName} v${packageVersion}`
   logger.info(`Packing '${packageNameAndVersion}'...`)
