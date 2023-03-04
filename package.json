@@ -1,6 +1,6 @@
 {
   "name": "octopus-deploy",
-  "version": "6.3.0",
+  "version": "6.3.1",
   "description": "Node scripts to package up applications, create releases, and deploy with Octopus Deploy. This package leverages the Octopus Deploy REST API in order to deploy from Windows and non-Windows machines.",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,7 @@
   "homepage": "https://github.com/parkerholladay/node-octopus-deploy",
   "dependencies": {
     "archiver": "5.3.1",
-    "glob-stream": "6.1.0",
+    "glob-stream": "7.0.0",
     "json-casing": "1.2.10",
     "request": "2.88.2",
     "request-promise-native": "1.0.9",
