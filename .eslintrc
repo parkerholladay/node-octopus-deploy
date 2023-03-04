@@ -53,10 +53,6 @@
         "asyncArrow": "always"
       }
     ],
-    "standard/object-curly-even-spacing": [
-      2,
-      "always"
-    ],
     "yield-star-spacing": [
       "error",
       {

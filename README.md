@@ -1,9 +1,14 @@
 # octopus-deploy
 
-[![build status](https://img.shields.io/github/workflow/status/parkerholladay/node-octopus-deploy/Build?logo=github&style=for-the-badge)](https://github.com/parkerholladay/node-octopus-deploy/actions)
+[![build status](https://img.shields.io/github/actions/workflow/status/parkerholladay/node-octopus-deploy/build.yaml?branch=master&logo=github&style=for-the-badge)](https://github.com/parkerholladay/node-octopus-deploy/actions)
 [![npm](https://img.shields.io/npm/v/octopus-deploy?logo=npm&style=for-the-badge)](https://www.npmjs.com/package/octopus-deploy)
 ![license](https://img.shields.io/npm/l/octopus-deploy?style=for-the-badge)
 ![test coverage](https://img.shields.io/nycrc/parkerholladay/node-octopus-deploy?label=coverage&config=.nycrc&preferredThreshold=functions&style=for-the-badge)
+
+## DEPRECATED
+
+There is now an [official CLI tool](https://octopus.com/docs/octopus-rest-api/octopus-cli) that replaces this utility and offers the full functionality of Octopus Deploy. And, the best part is, it is available on all platforms. As a result, this library has seen its last update.
+
 
 > Node scripts to package up applications, create releases, and deploy with Octopus Deploy.
 
